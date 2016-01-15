@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  	layout:decorator="layout/layout" ng-app="myApp">
+<head>
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+<meta name="_csrf" th:content="${_csrf.token}" />
+<title th:text="${title}">Title</title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"
+	href="../../css/bootstrap.min.css" />
+<link rel="stylesheet" th:href="@{/css/style.css}"
+	href="../../css/style.css" />
+<script>
+	  seajs.use("main/app");
+</script>
+</head>
+<body>
+<!-- 	<div class="view-container"> -->
+<!--     	<div data-ng-view class="view-frame"></div> -->
+<!--   	</div> -->
+	<section layout:fragment="content">
+		<div sec:authentication="name">
+	        The value of the "name" property of the authentication object should appear here.
+	    </div>
+		<div class="mobile-content">
+			<div ng-view ng-class="slide"></div>
+		</div>
+	</section>
+</body>
+</html>

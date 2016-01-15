@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorator="layout/layout">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+<title th:text="${title}">Title</title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"
+	href="../../css/bootstrap.min.css" />
+</head>
+<body>
+	<section layout:fragment="content">
+      <ul class="nav nav-pills nav-stacked">
+	   <li class="active"><a href="#">Home</a></li>
+	   <li><a href="/angular">angular</a></li>
+	   <li><a href="/thymeleaf">Thymeleaf</a></li>
+	   <li><a href="/rxjava">RxJava</a></li>
+	   <li><a href="/security">Security</a></li>
+	  </ul>
+    </section>
+    <footer>
+      <p layout:fragment="custom-footer">This is some footer content from content page 1</p>
+    </footer>
+</body>
+</html>
