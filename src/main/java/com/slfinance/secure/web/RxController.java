@@ -61,6 +61,12 @@ public class RxController {
 		return "rxCreate";
 	}
 	
+	@Secured("ROLE_USER")
+	@RequestMapping("/rxjs")
+	public String rxjs() {
+		return "rxjs/rxjs";
+	}
+	
 	private void testRxJavaCreate() {
 		Observable.create(new Observable.OnSubscribe<Integer>() {
 		    @Override

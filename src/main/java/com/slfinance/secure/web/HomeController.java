@@ -60,8 +60,8 @@ public class HomeController {
 
 	@RequestMapping(value = "/postOne", method = RequestMethod.POST)
 	@ResponseBody
-	public String post(@RequestBody Map<String, Object> param) {
-		return "home";
+	public Customer post(@RequestBody Map<String, Object> param) {
+		return new Customer("1", "richard", 28);
 	}
 
 	@Secured("ROLE_ADMIN")
