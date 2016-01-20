@@ -3,16 +3,6 @@
 <head>
 <meta name="_csrf_header" th:content="${_csrf.headerName}" />
 <meta name="_csrf" th:content="${_csrf.token}" />
-<script src="/js/sea/sea.js"></script>
-<script>
-	  // Set configuration
-	  seajs.config({
-	    base: "/js/",
-	    alias: {
-	      "jquery": "jquery/jquery.js"
-	    }
-	  });
-</script>
 <title th:text="${title}">Title</title>
 <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"
 	href="../../css/bootstrap.min.css" />
