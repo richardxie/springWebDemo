@@ -10,6 +10,10 @@ module.exports = function(grunt){
 			src: 'src/main/resources/static/app2/js/app.js',
 			dest: 'src/main/resources/static/dist/app2/js/<%= pkg.name %>.js'
         }, 
+        main:{
+			src: 'src/main/resources/static/main/js/main.js',
+			dest: 'src/main/resources/static/dist/main/js/main.js'
+        }, 
     },
 	uglify: {
 		my_target: {
@@ -21,14 +25,19 @@ module.exports = function(grunt){
 			files: {
 				'src/main/resources/static/dist/app2/js/<%= pkg.name %>.min.js': ['<%= browserify.js2.dest %>']
 			}
-		}
+		},
+		my_target3: {
+			files: {
+				'src/main/resources/static/dist/main/js/main.min.js': ['<%= browserify.main.dest %>']
+			}
+		},
 	},
     copy:{
 		all:{
 			expand: true,
 			cwd: 'src/main/resources/static',
 			src: ['**/*.html','**/*css', '**/*.png'],
-			dest: 'src/main/resources/static/dist'
+			dest: 'dist'
         },
     },
 	watch: {
@@ -42,6 +51,10 @@ module.exports = function(grunt){
 		js2:{
 			files:['src/main/resources/static/app2/js/*.js'],
 			tasks:['browserify:js2','uglify:my_target2']
+		},
+		main:{
+			files:['src/main/resources/static/main/js/*.js'],
+			tasks:['browserify:main','uglify:my_target3']
 		},
 		html:{
 			files:['**/*.html'],

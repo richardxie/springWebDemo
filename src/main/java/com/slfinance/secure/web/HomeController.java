@@ -67,20 +67,19 @@ public class HomeController {
 	}
 
 	@Secured("ROLE_ADMIN")
-	@RequestMapping("/home")
-	public String home(ModelMap model) {
-		model.put("message", "Hello World");
-		model.put("title", "Hello Home");
-		model.put("date", new Date());
-		return "home";
-	}
-
-	@Secured("ROLE_ADMIN")
 	@RequestMapping("/angular")
 	public String angular(ModelMap model) {
 		model.put("message", "Hello World");
 		model.put("title", "Hello Home");
 		model.put("date", new Date());
 		return "angular/app";
+	}
+	
+	@RequestMapping("/thymeleaf")
+	public String thymeleaf(ModelMap model) {
+		model.put("message", "Hello World");
+		model.put("title", "Hello Home");
+		model.put("date", new Date());
+		return "home";
 	}
 }

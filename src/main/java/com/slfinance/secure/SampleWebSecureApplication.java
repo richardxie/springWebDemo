@@ -114,7 +114,7 @@ public class SampleWebSecureApplication extends WebMvcConfigurerAdapter {
 		private SecurityProperties security;
 		
 		public void configure(WebSecurity web) throws Exception {
-			  web.ignoring().antMatchers("/static/**", "/**/*.html");  
+			  web.ignoring().antMatchers("/static/**", "/**/*.html", "/**/*.css", "/**/*.js");  
 		}
 
 

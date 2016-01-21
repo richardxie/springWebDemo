@@ -48,11 +48,6 @@ public class CustController {
 	@RequestMapping(value = "/cust", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public List<Customer> get() {
-//		List<Customer> c = Lists.newArrayList();
-//		c.add(new Customer("1", "richard", 28));
-//		c.add(new Customer("2", "emma", 18));
-//		c.add(new Customer("3", "alex", 18));
-//		c.add(new Customer("4", "jill", 38));
 		return customerRepository.findAll();
 	}
 	
