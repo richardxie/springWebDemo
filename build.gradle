@@ -93,10 +93,10 @@ grunt {
     
 }
 // runs "grunt build" as part of your gradle build
-build.dependsOn grunt_default
+build.dependsOn grunt_release
 
 // makes sure on each build that grunt is installed
-grunt_default.dependsOn 'installGrunt'
+grunt_release.dependsOn 'installGrunt'
 
 // processes your package.json before running grunt build
-grunt_default.dependsOn 'npmInstall'
+grunt_release.dependsOn 'npmInstall'

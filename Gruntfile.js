@@ -27,7 +27,7 @@ module.exports = function(grunt){
 		all:{
 			expand: true,
 			cwd: 'src/main/resources/static',
-			src: ['**/*.html','**/*css'],
+			src: ['**/*.html','**/*css', '**/*.png'],
 			dest: 'src/main/resources/static/dist'
         },
     },
@@ -36,11 +36,11 @@ module.exports = function(grunt){
 			livereload:true
         },
 		js1:{
-			files:['src/main/resources/static/app1/*.js'],
+			files:['src/main/resources/static/app1/js/*.js'],
 			tasks:['browserify:js1','uglify:my_target']
 		},
 		js2:{
-			files:['src/main/resources/static/app2/*.js'],
+			files:['src/main/resources/static/app2/js/*.js'],
 			tasks:['browserify:js2','uglify:my_target2']
 		},
 		html:{
