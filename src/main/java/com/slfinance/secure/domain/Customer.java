@@ -12,11 +12,19 @@
 * @date 2015年12月29日 下午4:39:07 
 * @version V1.0   
 */
-package com.slfinance.secure.web;
+package com.slfinance.secure.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 import lombok.Data;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /** 
  * @typeName Customer 
@@ -26,6 +34,7 @@ import lombok.Data;
  *  
  */
 @Data
+@Entity
 public class Customer implements Serializable{
 	
 	public Customer() {}
@@ -39,8 +48,17 @@ public class Customer implements Serializable{
 		age = i;
 	}
 	private static final long serialVersionUID = 1L;
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
 	private String id;
+	
+	@NotEmpty
 	private String name;
+
+	@Email
+    @NotEmpty
+    private String email;
+	
 	private int age;
 
 }

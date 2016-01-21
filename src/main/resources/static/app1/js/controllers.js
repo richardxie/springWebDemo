@@ -28,7 +28,7 @@ myController.controller('CustListCtrl', [ '$scope', '$http', 'CustService',
 	 		 					CustService.list()
 	 		 					    .success(function(custs) {
 	 		 					         $scope.custs = custs;
-	 		 					     		console.log('custs returned to controller.');
+	 		 					     	console.log('custs returned to controller.');
 	 		 					  	})
 	 		 					  	.error(function() {
 	 		 							console.log('custs retrieval failed.')

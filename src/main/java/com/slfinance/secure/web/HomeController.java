@@ -32,6 +32,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import rx.Observable;
 
+import com.slfinance.secure.domain.Customer;
+
 /**
  * 善林宝首页控制器
  * 

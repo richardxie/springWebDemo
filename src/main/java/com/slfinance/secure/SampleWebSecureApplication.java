@@ -131,7 +131,7 @@ public class SampleWebSecureApplication extends WebMvcConfigurerAdapter {
 		@Override
 		public void configure(AuthenticationManagerBuilder auth) throws Exception {
 			auth.inMemoryAuthentication().withUser("admin").password("admin")
-					.roles("ADMIN", "USER").and().withUser("user").password("user")
+					.roles("ADMIN", "SUPERVISOR", "USER").and().withUser("user").password("user")
 					.roles("USER");
 		}
 	}

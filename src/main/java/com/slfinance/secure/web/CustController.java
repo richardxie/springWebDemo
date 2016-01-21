@@ -19,6 +19,7 @@ package com.slfinance.secure.web;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +27,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.common.collect.Lists;
+import com.slfinance.secure.domain.Customer;
+import com.slfinance.secure.domain.CustomerRepository;
 
 /**
  * 用户控制器
@@ -36,21 +38,29 @@ import com.google.common.collect.Lists;
  */
 @Controller
 public class CustController {
+	private final CustomerRepository customerRepository;
+	
+	@Autowired
+	public CustController(CustomerRepository customerRepository) {
+		this.customerRepository = customerRepository;
+	}
+	
 	@RequestMapping(value = "/cust", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public List<Customer> get() {
-		List<Customer> c = Lists.newArrayList();
-		c.add(new Customer("1", "richard", 28));
-		c.add(new Customer("2", "emma", 18));
-		c.add(new Customer("3", "alex", 18));
-		c.add(new Customer("4", "jill", 38));
-		return c;
+//		List<Customer> c = Lists.newArrayList();
+//		c.add(new Customer("1", "richard", 28));
+//		c.add(new Customer("2", "emma", 18));
+//		c.add(new Customer("3", "alex", 18));
+//		c.add(new Customer("4", "jill", 38));
+		return customerRepository.findAll();
 	}
 	
 	@RequestMapping(value = "/cust/{id}", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public Customer getOne(@PathVariable("id") String id) {
-		return new Customer("1", "richard", 28);
+		//return new Customer("1", "richard", 28);
+		return customerRepository.findOne(id);
 	}
 	
 	@RequestMapping(value = "/cust", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")

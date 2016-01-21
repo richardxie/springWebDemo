@@ -1,10 +1,6 @@
-create table users (
-  username varchar(256),
-  password varchar(256),
-  enabled boolean
-);
-
-create table authorities (
-  username varchar(256),
-  authority varchar(256)
+create table customer (
+	id varchar(50) NOT NULL PRIMARY KEY,
+	name varchar(64) NOT NULL,
+	email varchar(64) NOT NULL,
+	age int
 );

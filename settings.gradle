@@ -16,4 +16,5 @@ include 'api'
 include 'services:webservice'
 */
 
-rootProject.name = 'test'
+rootProject.name = 'springWebDemo'
+rootProject.description = 'a Spring boot web project, include technology: security, angular, rxjs '

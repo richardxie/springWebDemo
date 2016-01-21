@@ -34,6 +34,8 @@ import rx.Observable;
 import rx.Subscriber;
 import rx.schedulers.Schedulers;
 
+import com.slfinance.secure.domain.Customer;
+
 /**
  * RXjava测试控制器
  * 
