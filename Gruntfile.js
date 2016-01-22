@@ -32,6 +32,50 @@ module.exports = function(grunt){
 			}
 		}
 	},
+	less: {
+		  less1: {
+		    options: {
+		      paths: ["src/main/resources/static/src/app1/css"],
+		      plugins: [
+				        new (require('less-plugin-autoprefix'))({browsers: ["last 3 versions"]}),
+				        //new (require('less-plugin-clean-css'))(cleanCssOptions)
+				      ],
+		    },
+		    files: {
+		      "src/main/resources/static/src/app1/css/style.css": "src/main/resources/static/src/app1/less/*.less"
+		    }
+		  },
+	},
+	 //压缩CSS
+	cssmin: {
+		  common: {
+		    files: [{
+		      expand: true,
+		      cwd: 'src/main/resources/static/src/css',
+		      src: ['*.css', '!*.min.css'],
+		      dest: 'src/main/resources/static/dist/css',
+		      ext: '.min.css'
+		    }]
+		  },
+		  cs1: {
+			  files: [{
+			      expand: true,
+			      cwd: 'src/main/resources/static/src/app1/css',
+			      src: ['*.css', '!*.min.css'],
+			      dest: 'src/main/resources/static/dist/app1/css',
+			      ext: '.min.css'
+			    }]
+		  },
+		  cs2: {
+			  files: [{
+			      expand: true,
+			      cwd: 'src/main/resources/static/src/app2/css',
+			      src: ['*.css', '!*.min.css'],
+			      dest: 'src/main/resources/static/dist/app2/css',
+			      ext: '.min.css'
+			    }]
+		  }
+	},
     copy:{
 		all:{
 			expand: true,
@@ -52,6 +96,10 @@ module.exports = function(grunt){
 			files:['src/main/resources/static/src/app2/js/*.js'],
 			tasks:['browserify:js2','uglify:my_target2']
 		},
+		css1: {
+			files:['src/main/resources/static/src/app2/less/*.less'],
+			tasks:['less:less1','cssmin.cs1']
+		},
 		main:{
 			files:['src/main/resources/static/src/main/js/*.js'],
 			tasks:['browserify:main','uglify:my_target3']
@@ -62,12 +110,15 @@ module.exports = function(grunt){
 		}
     }
     });
+    
 
     grunt.loadNpmTasks('grunt-browserify');
     grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-contrib-less');
+	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	
-    grunt.registerTask('default',['browserify', 'copy']);
-	grunt.registerTask('release',['browserify', 'uglify', 'copy']);
+    grunt.registerTask('default',['browserify', 'less', 'copy']);
+	grunt.registerTask('release',['browserify', 'uglify', 'less', 'cssmin', 'copy']);
 }
