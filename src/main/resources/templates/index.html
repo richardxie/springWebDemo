@@ -7,8 +7,6 @@
 <meta name="_csrf_header" th:content="${_csrf.headerName}" />
 <meta name="_csrf" th:content="${_csrf.token}" />
 <title th:text="${title}">Title</title>
-<link rel="stylesheet" th:href="@{css/bootstrap.min.css}"
-	href="../../css/bootstrap.min.css" />
 <script src="/dist/main/js/main.min.js"></script>
 </head>
 <body>
@@ -23,7 +21,7 @@
 	  </ul>
     </section>
     <footer>
-      <p layout:fragment="custom-footer">This is some footer content from content page 1</p>
+      <p layout:fragment="custom-footer">This is some footer content from home page</p>
     </footer>
 </body>
 </html>

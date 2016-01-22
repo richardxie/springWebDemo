@@ -6,8 +6,7 @@
 <meta name="_csrf_header" th:content="${_csrf.headerName}" />
 <meta name="_csrf" th:content="${_csrf.token}" />
 <title th:text="${title}">Title</title>
-<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"
-	href="../../css/bootstrap.min.css" />
+
 <link rel="stylesheet" th:href="@{/app1/css/style.css}"
 	href="../../app1/css/style.css" />
 <script src="/dist/app1/js/app.min.js"></script>
@@ -17,9 +16,6 @@
 <!--     	<div data-ng-view class="view-frame"></div> -->
 <!--   	</div> -->
 	<section layout:fragment="content">
-		<div sec:authentication="name">
-	        The value of the "name" property of the authentication object should appear here.
-	    </div>
 		<div class="mobile-content">
 			<div ng-view ng-class="slide"></div>
 		</div>

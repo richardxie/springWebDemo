@@ -1,0 +1,93 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+/*头部公用*/
+#header{ width:100%; z-index:9997; position:relative;}
+.header{padding:0px;position:relative;overflow:hidden; border-bottom:solid 1px #e5e5e5; z-index:9999; background-color:#ffffff;  height:50px; text-align:center;}
+.header h1 { font-size:20px; line-height:50px; color:#525252; font-weight:normal;}
+.header h1.DropDown { display: inline-block; margin: 0px auto; position: relative; padding: 0px 20px;}
+.header h1.DropDown .arrow-down{width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:4px solid #555; line-height:0px !important;position: absolute;right: 5px;top: 23px;z-index: 1;}
+
+.TopNav { width:140px; background-color: #ffffff; position: absolute; top: 50px; left: 50%; margin-left: -70px; height: 205px;z-index:9998;}
+.TopNav ul { width:100%; overflow:hidden;}
+.TopNav ul li { float:left; width:100%; border-bottom: solid 1px #e5e5e5; border-right: solid 1px #e5e5e5; border-left: solid 1px #e5e5e5;}
+.TopNav ul li a { display:block; float:left; width:100%; text-align:center; height:40px; line-height:40px; color: #525252;}
+
+.TopNav {
+transition:All 0.4s ease-in-out;
+-webkit-transition:All 0.4s ease-in-out;
+transform:translate(0,-205px);
+-webkit-transform:translate(0,-205px);
+}
+.TopNav.show {
+	transform:translate(0,0px);
+	-webkit-transform:translate(0,0px);
+}
+
+.header .topbtn { border: solid 1px #ff7461; border-radius: 3px; position:absolute; top:11px; left:15px;background-color:#ff7461; }
+.header .topbtn a {  padding:0px 8px; font-size:14px; color:#ffffff; height: 26px; line-height: 26px; display: inline-block;}
+.header .topbtn .btnRegister { background-color: #ffffff; color: #ff7461;border-top-right-radius: 3px;border-bottom-right-radius: 3px;}
+
+.SideMenu {position: absolute;top: 49px;left: 0px;height: auto;width: 100%;background: #ffffff;border: 1px solid #d7dadb; z-index:9997;
+	transition:All 0.4s ease-in-out;
+	-webkit-transition:All 0.4s ease-in-out;
+	transform:translate(0,-81px);
+	-webkit-transform:translate(0,-81px);
+}
+.SideMenu.show {
+	transform:translate(0,0px);
+	-webkit-transform:translate(0,0px);
+}
+
+.SideMenu ul {display: -webkit-box;-webkit-box-orient: horizontal;}
+.SideMenu li {-webkit-box-flex: 1;border-right: solid 1px #d7dadb; height: 80px; width:1px;}
+.SideMenu li:last-child { border-right: 0px;}
+.SideMenu li a {width: auto;display:block;padding: 10px 0px 5px 0px;float:none;text-align: center;color:#444444;font-size:15px;}
+.SideMenu .icon { background-image: url("../images/common/SideMenu_icon.png"); background-position: left top; background-repeat: no-repeat; background-size: auto 40px; height: 40px; width: 40px; display: block; margin: 0px auto; background-color: #3c9bf9; border-radius: 50%;}
+.SideMenu .icon.MenuMy {background-position: center top; background-color: #f75429;}
+.SideMenu .icon.MenuFaq {background-position: right top; background-color: #ffc119;}
+.SideMenu li a span { padding-top: 5px; display: block;}
+
+
+/*底部*/
+.footer { text-align:center; padding:0px 0px 12px 0px;}
+.footer .ftmenu { margin-bottom: 7px; }
+.footer .ftmenu a { color:#4b4b4b;line-height:28px; font-size:14px;}
+
+
+/*错误页*/
+.errorpage { width:100%; margin:0px auto; text-align: center; padding: 15px;}
+.errorpage .box { padding-bottom: 50px;}
+.errorpage .box h1 {color: #ffa100;font-size: 26px;font-weight: normal;margin-top:50px;}
+.errorpage .box .info {line-height:25px;}
+.errorpage .btn { margin-left:10px;}
+.errorpage .btn .ui-btn { width: 100%;}
+
+/*登陆注册页面*/
+.register { padding:10px 0px;}
+
+.loginbox { border-top: solid 1px #e5e5e5;}
+.LoginBanner { text-align:center; padding:30px 0px 10px 0px;}
+.LoginBanner img { height:100px; width:auto; border-radius: 50%;}
+
+.logindone { background-color: #ffffff;}
+.register .tips { width:100%; margin:0px auto;color: #333333; text-align:center; padding-top:20px;}
+.register .tips h1 { font-size:24px; line-height:30px;}
+.register .tips h2 {font-size:22px; line-height:30px;}
+.register .tips h2 .color { color: #ff7460;}
+.register .tips .tips_img { margin-bottom:10px;}
+
+.register .download { text-align:center; padding-top:16px; width: 80%; margin: 0px auto;}
+.register .download a.loanbtn { width: 100%; text-align: center; display: block; line-height: 45px; height: 45px; background-color: #ff7460; border: solid 1px #ff7460; color: #ffffff; font-size: 18px; border-radius: 10px;}
+.register .download a.downbtn { width: 100%; text-align: center; display: block; line-height: 45px; height: 45px; background-color: #ffffff; border: solid 1px #ff7460; color: #ff7460; font-size: 18px; border-radius: 10px; margin-top: 20px;}
+
+
+
+
+
+
+
+
+
+

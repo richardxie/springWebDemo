@@ -3,15 +3,15 @@ module.exports = function(grunt){
 	pkg: grunt.file.readJSON('package.json'),
     browserify: {
         js1:{
-			src: 'src/main/resources/static/app1/js/app.js',
+			src: 'src/main/resources/static/src/app1/js/app.js',
 			dest: 'src/main/resources/static/dist/app1/js/<%= pkg.name %>.js'
         },
 		js2:{
-			src: 'src/main/resources/static/app2/js/app.js',
+			src: 'src/main/resources/static/src/app2/js/app.js',
 			dest: 'src/main/resources/static/dist/app2/js/<%= pkg.name %>.js'
         }, 
         main:{
-			src: 'src/main/resources/static/main/js/main.js',
+			src: 'src/main/resources/static/src/main/js/main.js',
 			dest: 'src/main/resources/static/dist/main/js/main.js'
         }, 
     },
@@ -30,30 +30,30 @@ module.exports = function(grunt){
 			files: {
 				'src/main/resources/static/dist/main/js/main.min.js': ['<%= browserify.main.dest %>']
 			}
-		},
+		}
 	},
     copy:{
 		all:{
 			expand: true,
-			cwd: 'src/main/resources/static',
+			cwd: 'src/main/resources/static/src',
 			src: ['**/*.html','**/*css', '**/*.png'],
-			dest: 'dist'
-        },
+			dest: 'src/main/resources/static/dist'
+        }
     },
 	watch: {
 		options:{
 			livereload:true
         },
 		js1:{
-			files:['src/main/resources/static/app1/js/*.js'],
+			files:['src/main/resources/static/src/app1/js/*.js'],
 			tasks:['browserify:js1','uglify:my_target']
 		},
 		js2:{
-			files:['src/main/resources/static/app2/js/*.js'],
+			files:['src/main/resources/static/src/app2/js/*.js'],
 			tasks:['browserify:js2','uglify:my_target2']
 		},
 		main:{
-			files:['src/main/resources/static/main/js/*.js'],
+			files:['src/main/resources/static/src/main/js/*.js'],
 			tasks:['browserify:main','uglify:my_target3']
 		},
 		html:{

@@ -1,0 +1,106 @@
+*{
+    outline: none;
+}
+body,html{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+	background: #dfe2e2;
+    /*overflow:hidden;*/
+}
+
+/*list*/
+.nav-list {
+    border-top: 1px solid #9daca9;
+    border-bottom: 1px solid #fff;
+    background-color: #e5e9e8;
+}
+
+.nav-list__header {
+    padding: 4px 20px;
+    font-size: 30px;
+    font-weight: bold;
+    background-color: #d2d6d6;
+    color: #454545;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+    border-top: 1px solid rgba(255,255,255,0.5);
+    border-bottom: 1px solid rgba(255,255,255,0.23);
+    margin: 0;
+}
+
+.nav-list__container {
+    border-top: 1px solid #9daca9;
+    color: #454545;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nav-list__item {
+    /*padding: 1.25rem;*/
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #9daca9;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.nav-list__item:first-child {
+    border-top: 1px solid #d6dcdb;
+}
+.nav-list__item  a{
+    padding: 10px 0;
+    width: 100%;
+    font-size: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #333333;
+    display: block;
+	background-image: url("../image/arrow-next.png");
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+
+.back{
+	display: block;
+	padding: 15px 25px 15px 40px;
+	text-decoration: none;
+	cursor: pointer;
+	background-image: url("../image/arrow-back.png");
+	background-repeat: no-repeat;
+	background-position: 10px center;
+	/*margin-left: 20px;*/
+	font-size: 26px;
+	text-align: center;
+	border: 1px solid transparent;
+	-webkit-border-radius: 7px;
+	-moz-border-radius: 7px;
+	border-radius: 7px;
+	float: left;
+}
+.back:hover{
+	background-color: #f6f6f6;
+	border: 1px solid #d2d6d6;
+
+}
+.clear{
+	clear: both;
+}
+.content{
+	padding: 0 10px;
+}
+.mobile{
+	background-image: url("../image/mobile_bg.png");
+	width: 244px;
+	height: 437px;
+	position: relative;
+	margin: 0 auto;
+	padding: 91px 26px;
+	overflow: hidden;
+}
+.mobile-content{
+	position: relative;
+	width: 100%;
+	height: 439px;
+	overflow: hidden;
+}
