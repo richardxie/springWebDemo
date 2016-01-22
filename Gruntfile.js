@@ -45,6 +45,18 @@ module.exports = function(grunt){
 		      "src/main/resources/static/src/app1/css/style.css": "src/main/resources/static/src/app1/less/*.less"
 		    }
 		  },
+		  less2: {
+		    options: {
+		      paths: ["src/main/resources/static/src/app2/css"],
+		      plugins: [
+				        new (require('less-plugin-autoprefix'))({browsers: ["last 3 versions"]}),
+				        //new (require('less-plugin-clean-css'))(cleanCssOptions)
+				      ],
+		    },
+		    files: {
+		      "src/main/resources/static/src/app2/css/style.css": "src/main/resources/static/src/app2/less/*.less"
+		    }
+		  }
 	},
 	 //压缩CSS
 	cssmin: {
@@ -97,8 +109,12 @@ module.exports = function(grunt){
 			tasks:['browserify:js2','uglify:my_target2']
 		},
 		css1: {
-			files:['src/main/resources/static/src/app2/less/*.less'],
+			files:['src/main/resources/static/src/app1/less/*.less'],
 			tasks:['less:less1','cssmin.cs1']
+		},
+		css2: {
+			files:['src/main/resources/static/src/app2/less/*.less'],
+			tasks:['less:less2','cssmin.cs2']
 		},
 		main:{
 			files:['src/main/resources/static/src/main/js/*.js'],

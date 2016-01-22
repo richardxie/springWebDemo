@@ -5,6 +5,8 @@ ehthumbs.db
 node_modules
 build
 dist
+.settings
+.gradle
 
 # Folder config file
 Desktop.ini
@@ -48,3 +50,4 @@ Temporary Items
 
 *.bin
 *.class
+/bin/
