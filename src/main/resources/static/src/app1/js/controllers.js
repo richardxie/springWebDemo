@@ -13,18 +13,18 @@ myController.controller('TestCtrl1', [ '$scope',
 myController.controller('CustListCtrl', [ '$scope', '$http', 'CustService',
 	 	                function($scope, $http, CustService) {
 	 		 				var vm = this;
-//	 		 				vm.list = function() {
-//	 		 				CustService.list()
-//	 		 					.then(function(custs) {
-//	 		 					      $scope.custs = custs.data;
-//	 		 					       console.log('custs returned to controller.');
-//	 		 					},
-//	 		 					function() {
-//	 		 					    console.log('custs retrieval failed.')
-//	 		 					 });
-//	 		 				};
-	 		 					        
 	 		 				vm.list = function() {
+ 		 					CustService.list()
+	 		 					.then(function(custs) {
+	 		 					      $scope.custs = custs.data;
+	 		 					       console.log('custs returned to controller.');
+	 		 					},
+	 		 					function() {
+	 		 					    console.log('custs retrieval failed.')
+	 		 					 });
+	 		 				};
+	 		 					        
+	 		 				/*vm.list = function() {
 	 		 					CustService.list()
 	 		 					    .success(function(custs) {
 	 		 					         $scope.custs = custs;
@@ -33,7 +33,7 @@ myController.controller('CustListCtrl', [ '$scope', '$http', 'CustService',
 	 		 					  	.error(function() {
 	 		 							console.log('custs retrieval failed.')
 	 		 					    });		 					           
-	 		 					};
+	 		 					};*/
 	 		 					        
 	 		 					vm.list();
 	 	               			$scope.orderProp = 'age';

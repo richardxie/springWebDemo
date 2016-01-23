@@ -7,8 +7,9 @@ var myService = angular.module('myApp.service', []);
  * no need to customize a promise again
  * notice: json date is stored in returnObject.data
  */
-myService.service('CustService', ["$http", "$q", function($http, $q) {
+myService.service('CustService', ["$http", "$q", function( $http, $q) {
 	this.list = function() {
+		console.log("cust list  service!");
 		return $http.get('/cust');
 	};
 

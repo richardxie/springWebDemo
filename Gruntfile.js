@@ -35,11 +35,15 @@ module.exports = function(grunt){
 	less: {
 		  less1: {
 		    options: {
-		      paths: ["src/main/resources/static/src/app1/css"],
-		      plugins: [
+		      	paths: ["src/main/resources/static/src/app1/css"],
+		      	plugins: [
 				        new (require('less-plugin-autoprefix'))({browsers: ["last 3 versions"]}),
-				        //new (require('less-plugin-clean-css'))(cleanCssOptions)
-				      ],
+				        new (require('less-plugin-clean-css'))()
+				],
+				 modifyVars: {
+        			imgPath: '"http://mycdn.com/path/to/images"',
+       				 bgColor: 'red'
+      			}
 		    },
 		    files: {
 		      "src/main/resources/static/src/app1/css/style.css": "src/main/resources/static/src/app1/less/*.less"
@@ -96,6 +100,12 @@ module.exports = function(grunt){
 			dest: 'src/main/resources/static/dist'
         }
     },
+    karma: {
+ 		unit: {
+   			configFile: 'karma.conf.js',
+    		autoWatch: true
+  		}
+	},
 	watch: {
 		options:{
 			livereload:true
@@ -134,6 +144,7 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
+	grunt.loadNpmTasks('grunt-karma');
 	
     grunt.registerTask('default',['browserify', 'less', 'copy']);
 	grunt.registerTask('release',['browserify', 'uglify', 'less', 'cssmin', 'copy']);
