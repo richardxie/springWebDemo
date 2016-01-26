@@ -1,7 +1,7 @@
 @charset "utf-8";
 /* CSS Document */
 
-
+ *{font-family: 'MICROSOFT YAHEI'}
 /*头部公用*/
 #header{ width:100%; z-index:9997; position:relative;}
 .header{padding:0px;position:relative;overflow:hidden; border-bottom:solid 1px #e5e5e5; z-index:9999; background-color:#ffffff;  height:50px; text-align:center;}

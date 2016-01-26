@@ -98,6 +98,13 @@ module.exports = function(grunt){
 			cwd: 'src/main/resources/static/src',
 			src: ['**/*.html','**/*css', '**/*.png'],
 			dest: 'src/main/resources/static/dist'
+        },
+        bootstrap:{
+        	expand: true,
+			cwd: 'node_modules/bootstrap/dist',
+			src: ['css/bootstrap.min.css','js/bootstrap.min.js'],
+			dest: 'src/main/resources/static/dist'
+
         }
     },
     karma: {

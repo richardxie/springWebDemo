@@ -16,19 +16,22 @@
   <body>
   	<div class="container">
 	    <header>
-	      <div class="navbar">
-	        <div class="navbar-inner">
-	          <a class="brand" href="http://www.thymeleaf.org"> Thymeleaf -
-	            Plain </a>
-	          <ul class="nav">
-	            <li><a th:href="@{/}" href="home.html"> Home </a></li>
-	            <li><a th:href="@{/logout}" href="logout"> Logout </a></li>
-	            <li><a th:href="@{/rxjs}" href="rxjs"> 
-	            	<div sec:authentication="name" />
-			    </a></li>
-	          </ul>
-	        </div>
-	      </div>
+	      <nav class="navbar navbar-default" role="navigation" >
+	      	<div class="navbar-header">
+      			<a class="navbar-brand" href="http://www.thymeleaf.org">Thymeleaf</a>
+  			</div>
+
+  			<div>
+		   		<ul class="nav navbar-nav">
+		            <li><a th:href="@{/}" href="home.html"> Home </a></li>
+		            <li><a th:href="@{/logout}" href="logout"> Logout </a></li>
+		            <li><a th:href="@{/rxjs}" href="rxjs"> 
+		            	<div sec:authentication="name" />
+				    </a>
+				    </li>
+		      	</ul>
+	      	</div>
+	      </nav>
 	    </header>
 	    <section layout:fragment="content">
 	      <p>Page content goes here</p>

@@ -120,10 +120,10 @@ public class SampleWebSecureApplication extends WebMvcConfigurerAdapter {
 
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
-			http.authorizeRequests().antMatchers("/","/getOne","/cust","/cust/**").permitAll()
+			http.authorizeRequests().antMatchers("/", "/register", "/cust/isExist").permitAll()
 				.anyRequest().fullyAuthenticated()
 				.and().formLogin().loginPage("/login").failureUrl("/login?error").permitAll()
-				.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/")
+				.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/home")
 				.and().exceptionHandling().accessDeniedPage("/access?error")
 				.and().csrf();
 		}

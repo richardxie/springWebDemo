@@ -22,6 +22,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -56,6 +57,18 @@ public class CustController {
 	public Customer getOne(@PathVariable("id") String id) {
 		//return new Customer("1", "richard", 28);
 		return customerRepository.findOne(id);
+	}
+
+	@RequestMapping(value = "/cust/isExist", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public Boolean checkExist(@RequestParam("type") String type, @RequestParam("value") String value) {
+		if(type.equalsIgnoreCase("username"))
+			return customerRepository.findByName(value) != null;
+		else if(type.equalsIgnoreCase("email")) {
+			return customerRepository.findByEmail(value) != null;
+		}
+		else 
+			throw new IllegalArgumentException("无效的验证类型。");
 	}
 	
 	@RequestMapping(value = "/cust", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")

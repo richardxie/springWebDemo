@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="layout/layout" ng-app="main.login">
+<head>
+  <title>注册</title>
+  <script src="/dist/main/js/main.js"></script>
+</head>
+<body>
+  <section layout:fragment="content">
+    <div class="container" ng-controller="RegCtrl">
+      <div class="page-header">
+        <h2>注册<small> 异步验证</small></h2>
+      </div>
+      <form role="form" name="userForm" class="form-horizontal">
+        <div class="form-group">
+          <label for="username" class="col-sm-2 control-label">名字</label>
+          <div class="col-sm-10">
+            <input validate-name type="text" class="form-control" name="username"
+              placeholder="请输入名字" ng-model="user.username" ng-model-options="{updateOn:'blur'}"
+              ng-minlength="5"
+              ng-maxlength="30" 
+              required
+              unique-name>
+          </div>
+          <div ng-messages="userForm.username.$error">
+            <!-- the required message is displayed first... -->
+            <div class="alert alert-danger" role="alert" ng-message="required"><strong>Oh!</strong>You forgot to enter your name...</div>
+
+            <!-- then, incase the message is too short, show the message right after -->
+            <div class="alert alert-danger" role="alert"  ng-message="minlength"><strong>Oh!</strong>Your name is too short...</div>
+
+            <!-- of if is too long then let us know -->
+            <div  class="alert alert-danger" role="alert" ng-message="maxlength"><strong>Oh!</strong>Your name is too long...</div>
+
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email" class="col-sm-2 control-label">邮箱</label>
+          <div class="col-sm-10">
+            <input validate-name type="email" class="form-control" name="email"
+              placeholder="请输入邮箱" ng-model="user.email" ng-model-options="{updateOn:'blur'}"
+              ng-minlength="5"
+              ng-maxlength="30" 
+              required
+              unique-name
+              >
+          </div>
+          <div ng-messages="userForm.email.$error">
+            <!-- the required message is displayed first... -->
+            <div class="alert alert-danger" role="alert" ng-message="required"><strong>Oh!</strong>You forgot to enter your email...</div>
+
+            <!-- then, incase the message is too short, show the message right after -->
+            <div class="alert alert-danger" role="alert"  ng-message="minlength"><strong>Oh!</strong>Your email address is too short...</div>
+
+            <!-- of if is too long then let us know -->
+            <div  class="alert alert-danger" role="alert" ng-message="maxlength"><strong>Oh!</strong>Your email address is too long...</div>
+
+            <!-- otherwise let us know if the email itself is invalid -->
+            <div class="alert alert-danger" role="alert" ng-message="email">You did not enter your email address correctly...</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="button" class="btn btn-primary" ng-click="register()" ng-disabled="userForm.$invalid">提交</button>
+          </div>
+        </div>
+      </form>
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">用户名:</h3>
+        </div>
+        <div class="panel-body">
+          {{user.username}}
+        </div>
+      </div>
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">正在异步验证中:</h3>
+        </div>
+        <div class="panel-body">
+          {{user.username.$pending}}
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

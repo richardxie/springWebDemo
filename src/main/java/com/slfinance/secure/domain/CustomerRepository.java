@@ -44,5 +44,8 @@ public interface CustomerRepository extends JpaRepository<Customer, String> {
     Page<Customer> findAllForAddressBook(Pageable pageable);
 
     @RestResource(exported = false)
-    Customer findByEmail(String email);
+    Customer findByEmail(@Param("email") String email);
+    
+    @RestResource(exported = false)
+    Customer findByName(@Param("userName") String name);
 }
