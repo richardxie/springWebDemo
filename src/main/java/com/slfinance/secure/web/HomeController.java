@@ -30,9 +30,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import rx.Observable;
-
 import com.slfinance.secure.domain.Customer;
+
+import rx.Observable;
 
 /**
  * 善林宝首页控制器
@@ -49,6 +49,11 @@ public class HomeController {
 	       System.out.println("Hello " + s + "!");
 	    });
 		return "index";
+	}
+	
+	@RequestMapping("/register")
+	public String register(Map<String, Object> model) {
+		return "register";
 	}
 
 	@RequestMapping("/foo")

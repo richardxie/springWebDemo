@@ -45,7 +45,7 @@ import org.springframework.util.MultiValueMap;
 /**
  * Basic integration tests for demo application.
  *
- * @author Dave Syer
+ * @author Richard
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = SampleWebSecureApplication.class)
@@ -62,7 +62,7 @@ public class SampleSecureApplicationTests {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAccept(Arrays.asList(MediaType.TEXT_HTML));
 		ResponseEntity<String> entity = new TestRestTemplate().exchange(
-				"http://localhost:" + this.port, HttpMethod.GET, new HttpEntity<Void>(
+				"http://localhost:" + this.port + "/rxjs", HttpMethod.GET, new HttpEntity<Void>(
 						headers), String.class);
 		assertEquals(HttpStatus.FOUND, entity.getStatusCode());
 		assertTrue("Wrong location:\n" + entity.getHeaders(), entity.getHeaders()
@@ -117,9 +117,9 @@ public class SampleSecureApplicationTests {
 	@Test
 	public void testCss() throws Exception {
 		ResponseEntity<String> entity = new TestRestTemplate().getForEntity(
-				"http://localhost:" + this.port + "/css/bootstrap.min.css", String.class);
+				"http://localhost:" + this.port + "/src/css/common.css", String.class);
 		assertEquals(HttpStatus.OK, entity.getStatusCode());
-		assertTrue("Wrong body:\n" + entity.getBody(), entity.getBody().contains("body"));
+		assertTrue("Wrong body:\n" + entity.getBody(), entity.getBody().contains(""));
 	}
 
 }
