@@ -51,3 +51,7 @@ Temporary Items
 *.bin
 *.class
 /bin/
+
+src/main/resources/static/src/app1/css/style.css
+src/main/resources/static/src/app2/css/style.css
+src/main/resources/static/src/main/css/style.css

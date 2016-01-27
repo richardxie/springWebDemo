@@ -59,7 +59,7 @@ dependencies {
 	compile "com.google.guava:guava:17.0"
 	compile  'io.reactivex:rxjava:1.0.2'
 	compile "org.thymeleaf.extras:thymeleaf-extras-springsecurity4:2.1.2.RELEASE"
-	compile("net.sourceforge.nekohtml:nekohtml:1.9.21")
+	//compile("net.sourceforge.nekohtml:nekohtml:1.9.21")
 
   runtime("com.h2database:h2")
 }

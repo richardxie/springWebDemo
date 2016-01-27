@@ -22,15 +22,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.slfinance.secure.domain.Customer;
+import com.slfinance.secure.domain.CustomerRepository;
 
 import rx.Observable;
 
@@ -41,8 +46,16 @@ import rx.Observable;
  *
  */
 @Controller
+@Slf4j
 public class HomeController {
 
+	private final CustomerRepository customerRepository;
+	
+	@Autowired
+	public HomeController(CustomerRepository customerRepository) {
+		this.customerRepository = customerRepository;
+	}
+	
 	@RequestMapping("/")
 	public String home(Map<String, Object> model) {
 		Observable.just("one object").map((s) -> { return s + " map";}).subscribe( (s) ->{
@@ -55,7 +68,16 @@ public class HomeController {
 	public String register(Map<String, Object> model) {
 		return "register";
 	}
-
+	
+	@RequestMapping(value = "/register", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public Customer doRegister(@RequestBody Customer c, BindingResult result) {
+		if(result.hasErrors()) {
+			log.error("bind error:" + result.getErrorCount());
+		}
+		return customerRepository.save(c);
+	}
+	
 	@RequestMapping("/foo")
 	public String foo() {
 		List<Customer> c = Arrays.asList(new Customer("1", "Joe", 21), new Customer("2", "Jim", 22), new Customer("3", "John", 23));

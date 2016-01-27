@@ -38,7 +38,7 @@ module.exports = function(grunt){
 		      	paths: ["src/main/resources/static/src/app1/css"],
 		      	plugins: [
 				        new (require('less-plugin-autoprefix'))({browsers: ["last 3 versions"]}),
-				        new (require('less-plugin-clean-css'))()
+				        //new (require('less-plugin-clean-css'))()
 				],
 				 modifyVars: {
         			imgPath: '"http://mycdn.com/path/to/images"',
@@ -54,11 +54,23 @@ module.exports = function(grunt){
 		      paths: ["src/main/resources/static/src/app2/css"],
 		      plugins: [
 				        new (require('less-plugin-autoprefix'))({browsers: ["last 3 versions"]}),
-				        //new (require('less-plugin-clean-css'))(cleanCssOptions)
+				        //new (require('less-plugin-clean-css'))()
 				      ],
 		    },
 		    files: {
 		      "src/main/resources/static/src/app2/css/style.css": "src/main/resources/static/src/app2/less/*.less"
+		    }
+		  },
+		  less3: {
+		    options: {
+		      paths: ["src/main/resources/static/src/main/css"],
+		      plugins: [
+				        new (require('less-plugin-autoprefix'))({browsers: ["last 3 versions"]}),
+				        //new (require('less-plugin-clean-css'))()
+				      ],
+		    },
+		    files: {
+		      "src/main/resources/static/src/main/css/style.css": "src/main/resources/static/src/main/less/*.less"
 		    }
 		  }
 	},
@@ -90,6 +102,15 @@ module.exports = function(grunt){
 			      dest: 'src/main/resources/static/dist/app2/css',
 			      ext: '.min.css'
 			    }]
+		  },
+		  cs3: {
+			  files: [{
+			      expand: true,
+			      cwd: 'src/main/resources/static/src/main/css',
+			      src: ['*.css', '!*.min.css'],
+			      dest: 'src/main/resources/static/dist/main/css',
+			      ext: '.min.css'
+			    }]
 		  }
 	},
     copy:{
@@ -102,7 +123,7 @@ module.exports = function(grunt){
         bootstrap:{
         	expand: true,
 			cwd: 'node_modules/bootstrap/dist',
-			src: ['css/bootstrap.min.css','js/bootstrap.min.js'],
+			src: ['css/bootstrap.min.css', 'css/bootstrap.min.css.map','js/bootstrap.min.js'],
 			dest: 'src/main/resources/static/dist'
 
         }
@@ -127,11 +148,15 @@ module.exports = function(grunt){
 		},
 		css1: {
 			files:['src/main/resources/static/src/app1/less/*.less'],
-			tasks:['less:less1','cssmin.cs1']
+			tasks:['less:less1','cssmin:cs1']
 		},
 		css2: {
 			files:['src/main/resources/static/src/app2/less/*.less'],
-			tasks:['less:less2','cssmin.cs2']
+			tasks:['less:less2','cssmin:cs2']
+		},
+		css3: {
+			files:['src/main/resources/static/src/main/less/*.less'],
+			tasks:['less:less3','cssmin:cs3']
 		},
 		main:{
 			files:['src/main/resources/static/src/main/js/*.js'],

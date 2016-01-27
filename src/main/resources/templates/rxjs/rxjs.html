@@ -8,16 +8,16 @@
 <title th:text="${title}">Title</title>
 <link rel="stylesheet" th:href="@{/dist/css/bootstrap.min.css}"
 	href="/dist/css/bootstrap.min.css" />
-<link rel="stylesheet" href="/dist/app2/css/style.min.css">
+<link rel="stylesheet" href="/dist/app2/css/style.min.css" />
 <script src="/dist/app2/js/app.min.js"></script>
 </head>
 <body ng-app="rxApp">
 	<section layout:fragment="content">
-		<div rx-drag>Drag Me!</div>
+		<div rx-drag=''>Drag Me!</div>
 		<div  ng-controller="RxCtrl">
 			 <form ng-submit="submit(search)">
 			      <h2>Reactive Angular - Wikipedia Example</h2>
-			      <input type="text" ng-model="search">
+			      <input type="text" ng-model="search"></input>
 			      <button>Search</button>
 			  </form>
 		</div>

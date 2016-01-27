@@ -10,17 +10,9 @@ var _csrf_token = $("meta[name='_csrf']").attr("content");
 var _csrf_header = $("meta[name='_csrf_header']").attr("content");
 
 var login = angular.module('main.login', ['ngRoute', 'ngMessages']);
-login.config([ '$routeProvider', 
-	function($routeProvider) {
-		$routeProvider.when('/login', {
-				templateUrl : 'dist/main/partials/login.html',
-				controller : 'LoginCtrl'
-			}).when('/register', {
-				templateUrl : 'dist/main/partials/register.html',
-         		controller : 'RegCtrl'
-         	}).otherwise({
-         		redirectTo : '/login'
-         	});
+login.config([ '$httpProvider', 
+	function($httpProvider) {
+		$httpProvider.defaults.headers.common[_csrf_header] = _csrf_token;
 	} 
 ]);
 
@@ -32,7 +24,7 @@ login.controller('LoginCtrl', ["$scope", "$http", function($scope, $http) {
     };
 }]);
 
-login.controller('RegCtrl', ["$scope", "$http", function($scope, $http) {
+login.controller('RegCtrl', ["$scope", "$http", "$window", function($scope, $http, $window) {
 	console.log("i'm in RegCtrl");
     var vm = this;
 	$scope.user = {
@@ -42,11 +34,16 @@ login.controller('RegCtrl', ["$scope", "$http", function($scope, $http) {
     };
 
     $scope.register = function() {
-        console.log("register for:" + $scope.user.name + " and email:" + $scope.user.email);
-        $http.post('/cust')
+        console.log("register for:" + $scope.user.username + " and email:" + $scope.user.email);
+        $http.post('/register', {
+                name: $scope.user.username,
+                email: $scope.user.email,
+                age: 32
+            })
             .success(function(custs) {
                 $scope.custs = custs;
                 console.log('custs returned to controller.');
+                $window.location.href = '/';
             })
             .error(function() {
                 console.log('custs retrieval failed.')

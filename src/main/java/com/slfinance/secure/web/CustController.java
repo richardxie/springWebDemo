@@ -17,15 +17,17 @@
 package com.slfinance.secure.web;
 
 import java.util.List;
-import java.util.Map;
+
+import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.slfinance.secure.domain.Customer;
@@ -38,6 +40,7 @@ import com.slfinance.secure.domain.CustomerRepository;
  *
  */
 @Controller
+@Slf4j
 public class CustController {
 	private final CustomerRepository customerRepository;
 	
@@ -55,7 +58,6 @@ public class CustController {
 	@RequestMapping(value = "/cust/{id}", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public Customer getOne(@PathVariable("id") String id) {
-		//return new Customer("1", "richard", 28);
 		return customerRepository.findOne(id);
 	}
 
@@ -73,8 +75,8 @@ public class CustController {
 	
 	@RequestMapping(value = "/cust", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public Customer postOne(@RequestBody Map<String, Object> body) {
-		System.out.println(body);
-		return new Customer("1", "richard", 28);
+	public Customer postOne(@RequestBody Customer c) {
+		log.debug(c.toString());
+		return customerRepository.save(c);
 	}
 }

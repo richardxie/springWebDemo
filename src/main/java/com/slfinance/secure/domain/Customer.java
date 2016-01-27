@@ -23,6 +23,7 @@ import javax.persistence.Id;
 
 import lombok.Data;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -49,7 +50,9 @@ public class Customer implements Serializable{
 	}
 	private static final long serialVersionUID = 1L;
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(generator = "uuid")
+	@GenericGenerator(name = "uuid", strategy = "uuid2")
+    //@GeneratedValue(strategy = GenerationType.AUTO)
 	private String id;
 	
 	@NotEmpty

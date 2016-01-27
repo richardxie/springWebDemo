@@ -2,8 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorator="layout/layout" ng-app="main.login">
 <head>
-  <title>注册</title>
-  <script src="/dist/main/js/main.js"></script>
+	<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+	<meta name="_csrf" th:content="${_csrf.token}" />
+	<title>注册</title>
+	<script src="/dist/main/js/main.js"></script>
 </head>
 <body>
   <section layout:fragment="content">
@@ -15,14 +17,14 @@
         <div class="form-group">
           <label for="username" class="col-sm-2 control-label">名字</label>
           <div class="col-sm-10">
-            <input validate-name type="text" class="form-control" name="username"
+            <input validate-name='validate-name' type="text" class="form-control" name="username"
               placeholder="请输入名字" ng-model="user.username" ng-model-options="{updateOn:'blur'}"
               ng-minlength="5"
               ng-maxlength="30" 
-              required
-              unique-name>
+              required='true'
+              unique-name='username'></input>
           </div>
-          <div ng-messages="userForm.username.$error">
+          <div  class= "col-sm-offset-2 col-sm-10" ng-messages="userForm.username.$error">
             <!-- the required message is displayed first... -->
             <div class="alert alert-danger" role="alert" ng-message="required"><strong>Oh!</strong>You forgot to enter your name...</div>
 
@@ -38,15 +40,15 @@
         <div class="form-group">
           <label for="email" class="col-sm-2 control-label">邮箱</label>
           <div class="col-sm-10">
-            <input validate-name type="email" class="form-control" name="email"
+            <input validate-name='validate-name' type="email" class="form-control" name="email"
               placeholder="请输入邮箱" ng-model="user.email" ng-model-options="{updateOn:'blur'}"
               ng-minlength="5"
               ng-maxlength="30" 
-              required
-              unique-name
-              >
+              required='trure'
+              unique-name='email'
+              />
           </div>
-          <div ng-messages="userForm.email.$error">
+          <div ng-messages="userForm.email.$error" class= "col-sm-offset-2 col-sm-10" >
             <!-- the required message is displayed first... -->
             <div class="alert alert-danger" role="alert" ng-message="required"><strong>Oh!</strong>You forgot to enter your email...</div>
 
@@ -80,7 +82,7 @@
           <h3 class="panel-title">正在异步验证中:</h3>
         </div>
         <div class="panel-body">
-          {{user.username.$pending}}
+          {{userForm.username.$pending}}
         </div>
       </div>
     </div>
