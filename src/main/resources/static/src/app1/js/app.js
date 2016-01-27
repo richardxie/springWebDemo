@@ -15,7 +15,7 @@ exports.getTokens = function() {
 };
 
 var app = angular.module('myApp', [ 'ngRoute', 'ngAnimate', 'myApp.controller', 'myApp.service', 'myApp.directive']);
-app.config([ '$routeProvider', '$httpProvider', '$locationProvider'
+app.config([ '$routeProvider', '$httpProvider', '$locationProvider',
 	function($routeProvider, $httpProvider, $locationProvider) {
 		$routeProvider.when('/custs', {
 			templateUrl : 'dist/app1/partials/cust_list.html',

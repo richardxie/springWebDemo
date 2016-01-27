@@ -13,8 +13,9 @@ exports.getTokens = function() {
 };
 
 angular.module('rxApp', [ 'rx', 'rxApp.directive'])
-		.config(["$httpProvider", function($httpProvider) {
+		.config(["$httpProvider", '$locationProvider', function($httpProvider) {
 			$httpProvider.defaults.headers.common[_csrf_header] = _csrf_token;
+			$locationProvider.html5Mode(true);
 		}])
 		.controller('RxCtrl', ["$scope", "$http", "rx", function($scope, $http, rx) {
 
