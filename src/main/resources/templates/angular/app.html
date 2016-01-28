@@ -3,13 +3,13 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
   	layout:decorator="layout/layout" ng-app="myApp">
 <head>
-<meta name="_csrf_header" th:content="${_csrf.headerName}" />
-<meta name="_csrf" th:content="${_csrf.token}" />
-<title th:text="${title}">Title</title>
+	<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+	<meta name="_csrf" th:content="${_csrf.token}" />
+	<title th:text="${title}">Title</title>
 
-<link rel="stylesheet" th:href="@{/dist/app1/css/style.min.css}"
-	href="/dist/app1/css/style.min.css" />
-<script src="/dist/app1/js/app.min.js"></script>
+	<link rel="stylesheet" th:href="@{/dist/app1/css/style.min.css}"
+		href="/dist/app1/css/style.min.css" />
+	<script src="/dist/app1/js/app.min.js"></script>
 </head>
 <body>
 <!-- 	<div class="view-container"> -->
