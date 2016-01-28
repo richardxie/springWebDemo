@@ -9,18 +9,45 @@
 	<link rel="stylesheet" th:href="@{/dist/css/bootstrap.min.css}"
 		href="/dist/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="/dist/app2/css/style.min.css" />
-	<script src="/dist/app2/js/app.min.js"></script>
+	<script src="/dist/app2/js/app.js"></script>
 	<base href="/rxjs"></base>
 </head>
 <body ng-app="rxApp">
 	<section layout:fragment="content">
+		<div class="page-header">
+        	<h2>Reactive Angular Demo</h2>
+      	</div>
 		<div rx-drag=''>Drag Me!</div>
 		<div  ng-controller="RxCtrl">
 			 <form ng-submit="submit(search)">
-			      <h2>Reactive Angular - Wikipedia Example</h2>
 			      <input type="text" ng-model="search"></input>
 			      <button>Search</button>
 			  </form>
+
+			<table class="table">
+			   <caption>查询列表</caption>
+			   <thead>
+			      <tr>
+			         <th>名称</th>
+			         <th>邮件</th>
+			         <th>状态</th>
+			         <th>处理</th>
+			      </tr>
+			   </thead>
+			   <tbody>
+			      <tr ng-repeat="cust in results">
+			         <td>{{cust.name}}</td>
+			         <td>{{cust.email}}</td>
+			          <td>{{cust.state}}</td>
+			         <td>
+			         	<div>
+			         		<button>修改</button><button>冻结</button>
+			         	</div>
+			         </td>
+			      </tr>
+			   </tbody>
+			</table>
+
 		</div>
 	</section>
 

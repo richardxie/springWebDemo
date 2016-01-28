@@ -3,11 +3,12 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
   layout:decorator="layout/layout" ng-app="main">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"></meta>
-<meta name="_csrf_header" th:content="${_csrf.headerName}"></meta>
-<meta name="_csrf" th:content="${_csrf.token}"></meta>
-<title th:text="${title}">Title</title>
-<script src="/dist/main/js/main.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"></meta>
+	<meta name="_csrf_header" th:content="${_csrf.headerName}"></meta>
+	<meta name="_csrf" th:content="${_csrf.token}"></meta>
+	<title th:text="${title}">Title</title>
+	<script src="/dist/main/js/main.min.js"></script>
+	<base href="/"></base>
 </head>
 <body>
 	<section layout:fragment="content">

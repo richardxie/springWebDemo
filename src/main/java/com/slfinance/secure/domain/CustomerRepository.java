@@ -1,6 +1,7 @@
 package com.slfinance.secure.domain;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,7 +13,7 @@ import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 
-public interface CustomerRepository extends JpaRepository<Customer, String> {
+public interface CustomerRepository extends JpaRepository<Customer, String>, CustomerRepositoryCust{
 
     @Override
     @PostAuthorize("hasRole('ROLE_SUPERVISOR') or returnObject?.email == principal?.email")
@@ -48,4 +49,8 @@ public interface CustomerRepository extends JpaRepository<Customer, String> {
     
     @RestResource(exported = false)
     Customer findByName(@Param("userName") String name);
+    
+    List<Customer> findTop10ByNameLike(String pattern);
+    
+    List<Map<String, Object>> searchCust(String pattern);
 }

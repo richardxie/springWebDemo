@@ -10,9 +10,10 @@ var _csrf_token = $("meta[name='_csrf']").attr("content");
 var _csrf_header = $("meta[name='_csrf_header']").attr("content");
 
 var login = angular.module('main.login', ['ngRoute', 'ngMessages']);
-login.config([ '$httpProvider', 
-	function($httpProvider) {
+login.config([ '$httpProvider', '$locationProvider',
+	function($httpProvider, $locationProvider) {
 		$httpProvider.defaults.headers.common[_csrf_header] = _csrf_token;
+        $locationProvider.html5Mode(true);
 	} 
 ]);
 

@@ -12,8 +12,9 @@ exports.getTokens = function() {
 	return _csrf_token;
 };
 angular.module('main', [])
-.config(["$httpProvider", function($httpProvider) {
+.config(["$httpProvider", '$locationProvider', function($httpProvider, $locationProvider) {
 	$httpProvider.defaults.headers.common[_csrf_header] = _csrf_token;
+	$locationProvider.html5Mode(true);
 }])
 .controller('mainCtrl', ["$scope", "$http", "rx", function($scope, $http, rx) {
 	console.log("in mainCtrl");

@@ -12,6 +12,7 @@ exports.getTokens = function() {
 	return _csrf_token;
 };
 
+
 angular.module('rxApp', [ 'rx', 'rxApp.directive'])
 		.config(["$httpProvider", '$locationProvider', function($httpProvider, $locationProvider) {
 			$httpProvider.defaults.headers.common[_csrf_header] = _csrf_token;
@@ -19,12 +20,12 @@ angular.module('rxApp', [ 'rx', 'rxApp.directive'])
 		}])
 		.controller('RxCtrl', ["$scope", "$http", "rx", function($scope, $http, rx) {
 
-			function searchWikipedia(term) {
+			function searchCust(term) {
 				var deferred = $http({
-					url : "/postOne",
+					url : "/cust/searchCust",
 					method : "post",
 					data : {
-						action : "opensearch",
+						action : "namesearch",
 						search : term,
 						format : "json"
 					}
@@ -44,14 +45,13 @@ angular.module('rxApp', [ 'rx', 'rxApp.directive'])
 			 * The following code deals with: Creates a "submit"
 			* function which is an observable sequence instead of
 			* just a function.
-});
 			*/
 			$scope.$createObservableFunction('submit')
 				.map(function(term) {
 					console.log('submit clicked!')
 					return term;
 				})
-				.flatMapLatest(searchWikipedia).subscribe(
+				.flatMapLatest(searchCust).subscribe(
 					function(results) {
 						$scope.results = results;
 						console.log($scope.results);

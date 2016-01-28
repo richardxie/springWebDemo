@@ -31,7 +31,7 @@ app.config([ '$routeProvider', '$httpProvider', '$locationProvider',
 		});
 		
 		$httpProvider.defaults.headers.common[_csrf_header] = _csrf_token;
-		$locationProvider.html5Mode(true);
+		//$locationProvider.html5Mode(true);
 } ]).run(["$rootScope", "$window", function($rootScope, $window) {
 	$rootScope.slide = '';
 	$rootScope.$on('$routeChangeStart', function() {

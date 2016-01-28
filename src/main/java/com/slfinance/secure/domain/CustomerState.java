@@ -16,12 +16,11 @@ package com.slfinance.secure.domain;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 import lombok.Data;
 
@@ -38,35 +37,25 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 @Data
 @Entity
-public class Customer implements Serializable{
+public class CustomerState implements Serializable{
 	
-	public Customer() {}
+	public CustomerState() {}
 	/**
 	 * @param string
 	 * @param i
 	 */
-	public Customer(String id, String string, int i) {
+	public CustomerState(int id, String string) {
 		this.id = id;
-		name = string;
-		age = i;
+		description = string;
 	}
 	private static final long serialVersionUID = 1L;
+	
 	@Id
-	@GeneratedValue(generator = "uuid")
-	@GenericGenerator(name = "uuid", strategy = "uuid2")
-    //@GeneratedValue(strategy = GenerationType.AUTO)
-	private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id")
+	private int id;
 	
 	@NotEmpty
-	private String name;
-
-	@Email
-    @NotEmpty
-    private String email;
-	
-	private int age;
-	
-	@ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH }, optional = true)   
-    @JoinColumn(name="state")
-	private CustomerState state;
+	@Column(name="description", length = 64)
+	private String description;
 }

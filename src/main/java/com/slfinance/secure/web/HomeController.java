@@ -56,7 +56,7 @@ public class HomeController {
 		this.customerRepository = customerRepository;
 	}
 	
-	@RequestMapping("/")
+	@RequestMapping(value= {"/", "/home"})
 	public String home(Map<String, Object> model) {
 		Observable.just("one object").map((s) -> { return s + " map";}).subscribe( (s) ->{
 	       System.out.println("Hello " + s + "!");
@@ -64,7 +64,7 @@ public class HomeController {
 		return "index";
 	}
 	
-	@RequestMapping("/register")
+	@RequestMapping(value = "/register",  method = RequestMethod.GET)
 	public String register(Map<String, Object> model) {
 		return "register";
 	}

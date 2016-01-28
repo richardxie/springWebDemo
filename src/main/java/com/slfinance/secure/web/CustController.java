@@ -17,12 +17,12 @@
 package com.slfinance.secure.web;
 
 import java.util.List;
+import java.util.Map;
 
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.common.collect.Lists;
 import com.slfinance.secure.domain.Customer;
 import com.slfinance.secure.domain.CustomerRepository;
 
@@ -53,6 +54,24 @@ public class CustController {
 	@ResponseBody
 	public List<Customer> get() {
 		return customerRepository.findAll();
+	}
+	
+	@RequestMapping(value = "/cust/search", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public List<Customer> searchByName(@RequestBody Map<String, String> search) {
+		String searchAction = search.get("action");
+		if("namesearch".equals(searchAction))
+			return customerRepository.findTop10ByNameLike(search.get("search"));
+		return Lists.newArrayList();
+	}
+	
+	@RequestMapping(value = "/cust/searchCust", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public List<Map<String, Object>> search(@RequestBody Map<String, String> search) {
+		String searchAction = search.get("action");
+		if("namesearch".equals(searchAction))
+			return customerRepository.searchCust(search.get("search"));
+		return Lists.newArrayList();
 	}
 	
 	@RequestMapping(value = "/cust/{id}", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
