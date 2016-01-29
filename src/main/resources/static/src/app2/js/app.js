@@ -1,8 +1,8 @@
 'use strict';
 // 通过 require 引入依赖
 var $ = require('jquery');
-require("rxjs");
-require("rx-angular");
+require('rx-lite');
+require('rx-lite-angular');
 require("./directives");
 
 var _csrf_token = $("meta[name='_csrf']").attr("content");
