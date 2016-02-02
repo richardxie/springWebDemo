@@ -24,8 +24,6 @@ import javax.persistence.Id;
 
 import lombok.Data;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /** 
@@ -38,7 +36,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Data
 @Entity
 public class CustomerState implements Serializable{
-	
+	public static CustomerState NormalState = new CustomerState(1, "normal");
 	public CustomerState() {}
 	/**
 	 * @param string

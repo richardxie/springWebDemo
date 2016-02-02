@@ -36,6 +36,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.slfinance.secure.domain.Customer;
 import com.slfinance.secure.domain.CustomerRepository;
+import com.slfinance.secure.domain.CustomerState;
 
 import rx.Observable;
 
@@ -75,6 +76,7 @@ public class HomeController {
 		if(result.hasErrors()) {
 			log.error("bind error:" + result.getErrorCount());
 		}
+		c.setState(CustomerState.NormalState);
 		return customerRepository.save(c);
 	}
 	

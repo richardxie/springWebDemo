@@ -5,50 +5,31 @@
 <head>
 	<meta name="_csrf_header" th:content="${_csrf.headerName}" />
 	<meta name="_csrf" th:content="${_csrf.token}" />
-	<title th:text="${title}">Title</title>
-	<link rel="stylesheet" th:href="@{/dist/css/bootstrap.min.css}"
-		href="/dist/css/bootstrap.min.css" />
+<!--	<title th:text="${title}">Title</title> -->
+	<title ng-bind="$state.current.name">angular demo</title>
 	<link rel="stylesheet" href="/dist/app2/css/style.min.css" />
+	<link rel="stylesheet" href="/dist/css/select.min.css" />
 	<script src="/dist/app2/js/app.js"></script>
-	<base href="/rxjs"></base>
+	<script src="/dist/js/select.min.js"></script>
+<!--	<base href="/rxjs"></base> -->
 </head>
 <body ng-app="rxApp">
 	<section layout:fragment="content">
 		<div class="page-header">
         	<h2>Reactive Angular Demo</h2>
       	</div>
-		<!--<div rx-drag=''>Drag Me!</div> -->
-		<div  ng-controller="RxCtrl">
-			 <form ng-submit="submit(search)">
-			      <input type="text" ng-model="search"></input>
-			      <button>Search</button>
-			  </form>
 
-			<table class="table">
-			   <caption>查询列表</caption>
-			   <thead>
-			      <tr>
-			         <th>名称</th>
-			         <th>邮件</th>
-			         <th>状态</th>
-			         <th>处理</th>
-			      </tr>
-			   </thead>
-			   <tbody>
-			      <tr ng-repeat="cust in results">
-			         <td>{{cust.name}}</td>
-			         <td>{{cust.email}}</td>
-			          <td>{{cust.state}}</td>
-			         <td>
-			         	<div>
-			         		<button>修改</button><button>冻结</button>
-			         	</div>
-			         </td>
-			      </tr>
-			   </tbody>
-			</table>
+		 <div ui-view=""></div>
 
-		</div>
+		<hr />
+	    <pre>
+	      <!-- Here's some values to keep an eye on in the sample in order to understand $state and $stateParams -->
+	      $state = {{$state.current.name}}
+	      $stateParams = {{$stateParams}}
+	      $state full url = {{ $state.$current.url.source }}
+	      <!-- $state.$current is not a public api, we are using it to
+	           display the full url for learning purposes-->
+	    </pre>
 	</section>
 
 </body>

@@ -123,10 +123,22 @@ module.exports = function(grunt){
         bootstrap:{
         	expand: true,
 			cwd: 'node_modules/bootstrap/dist',
-			src: ['css/bootstrap.min.css', 'css/bootstrap.min.css.map','js/bootstrap.min.js'],
+			src: ['*/*.*'],
 			dest: 'src/main/resources/static/dist'
-
+        },
+        select: {
+        	expand: true,
+			cwd: 'node_modules/angular-ui-select',
+			src: ['*.css'],
+			dest: 'src/main/resources/static/dist/css'
+        },
+        select: {
+        	expand: true,
+			cwd: 'node_modules/angular-ui-select',
+			src: ['*.js'],
+			dest: 'src/main/resources/static/dist/js'
         }
+
     },
     karma: {
  		unit: {

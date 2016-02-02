@@ -1,0 +1,41 @@
+<div class="container">
+     <form class="form-horizontal" role="form" name="form" th:action="@{/login}" action="/login" method="POST">
+			<div class="form-group">
+				<label for="username" class="col-sm-2 control-label">名字</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="username" ng-model="user.name"
+						placeholder="请输入名字"></input>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label for="password" class="col-sm-2  control-label">邮箱</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="password" ng-model="user.password"
+						placeholder="请输入邮箱"></input>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="password" class="col-sm-2  control-label">状态</label>
+
+				<div class="col-sm-10">
+					<ui-select ng-model="selectedItem">
+					    <ui-select-match>
+					        <span ng-bind="$select.selected.name"></span>
+					    </ui-select-match>
+					    <ui-select-choices repeat="item in (stateArray | filter: $select.search) track by item.id">
+					        <span ng-bind="item.name"></span>
+					    </ui-select-choices>
+					</ui-select>
+				</div>
+			</div>
+
+  			<div class="form-group">
+  				 <div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-primary">提交</button>
+				</div>
+			</div>
+			
+		</form>
+</div>
