@@ -126,13 +126,13 @@ module.exports = function(grunt){
 			src: ['*/*.*'],
 			dest: 'src/main/resources/static/dist'
         },
-        select: {
+        selectcss: {
         	expand: true,
 			cwd: 'node_modules/angular-ui-select',
 			src: ['*.css'],
 			dest: 'src/main/resources/static/dist/css'
         },
-        select: {
+        selectjs: {
         	expand: true,
 			cwd: 'node_modules/angular-ui-select',
 			src: ['*.js'],

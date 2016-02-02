@@ -80,6 +80,12 @@ public class CustController {
 		return customerRepository.findOne(id);
 	}
 
+	@RequestMapping(value = "/cust/{id}", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public Customer getOne(@PathVariable("id") String id, @RequestBody Customer c) {
+		return customerRepository.save(c);
+	}
+
 	@RequestMapping(value = "/cust/isExist", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public Boolean checkExist(@RequestParam("type") String type, @RequestParam("value") String value) {
