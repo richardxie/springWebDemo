@@ -110,50 +110,56 @@ angular.module('rxApp', [ 'rx', 'rxApp.directive', "rxApp.service", 'ui.router',
 			.subscribe(function(val){ $scope.results = val; $scope.$apply();});
 		}
 	])
-	.controller("EditCtrl", ["$scope", "$http", "$stateParams", "rx", "CustService", function($scope, $http, $stateParams, rx, CustService) {
-		$scope.currentCust = '';
-		var vm = this;
-	 	vm.getById = function(id) {
- 		 	CustService.detail(id)
-	 		 	.then(function(custs) {
-	 		 		$scope.currentCust = custs.data;
-	 		 		console.log('custs returned to controller.');
-	 		 	},
-	 		 	function() {
-	 		 		console.log('custs retrieval failed.')
-	 		 	});
-	 		};
+	.controller("EditCtrl", ["$scope", "$http", "$state", "$stateParams", "rx", "CustService", 
+		function($scope, $http, $state, $stateParams, rx, CustService) {
+			$scope.currentCust = '';
+			var vm = this;
+		 	vm.getById = function(id) {
+	 		 	CustService.detail(id)
+		 		 	.then(function(custs) {
+		 		 		$scope.currentCust = custs.data;
+		 		 		console.log('custs returned to controller.');
+		 		 	},
+		 		 	function() {
+		 		 		console.log('custs retrieval failed.')
+		 		 	});
+		 		};
 
-	 	vm.getById($stateParams.custId);
+		 	vm.getById($stateParams.custId);
 
-	 	function editCust() {
-			var deferred = $http({
-				url : "/cust/" + $stateParams.custId,
-				method : "post",
-				data : $scope.currentCust
-			});
+		 	function editCust() {
+				var deferred = $http({
+					url : "/cust/" + $stateParams.custId,
+					method : "post",
+					data : $scope.currentCust
+				});
 
-			return rx.Observable
-				.fromPromise(deferred)
-				.map(
-					function(response) {
-						console.log(response);
-						return response.data;
+				return rx.Observable
+					.fromPromise(deferred)
+					.map(
+						function(response) {
+							console.log(response);
+							return response.data;
+						}
+					);
+			};
+
+			$scope.$createObservableFunction('submit')
+				.debounce(300)
+				.map(function(term) {
+					console.log('submit clicked!' + term)
+					return term;
+				})
+				.flatMapLatest(editCust)
+				.subscribe(
+					function(results) {
+						$scope.$apply();
+						console.log(results);
 					}
 				);
-		};
 
-		$scope.$createObservableFunction('submit')
-			.debounce(300)
-			.map(function(term) {
-				console.log('submit clicked!' + term)
-				return term;
-			})
-			.flatMapLatest(editCust)
-			.subscribe(
-				function(results) {
-					$scope.$apply();
-					console.log(results);
-				}
-			);
+			$scope.cancel = function () {
+				// Go back up. '^' means up one. '^.^' would be up twice, to the grandparent.
+				$state.go('^', $stateParams);
+			};
 	}]);
