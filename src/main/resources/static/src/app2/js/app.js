@@ -30,7 +30,7 @@ angular.module('rxApp', [ 'rx', 'rxApp.directive', "rxApp.service", 'ui.router',
 				controller: 'RxCtrl'
 			})
 			.state('list.detail', {
-				url: '/{custId:[0-9]{1,4}}',
+				url: '/{custId:[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}}',
 				templateUrl: "/dist/app2/partials/state1.edit.html",
 				controller: 'EditCtrl'
 			})
