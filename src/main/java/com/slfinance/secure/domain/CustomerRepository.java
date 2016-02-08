@@ -50,7 +50,7 @@ public interface CustomerRepository extends JpaRepository<Customer, String>, Cus
     @RestResource(exported = false)
     Customer findByName(@Param("userName") String name);
     
-    List<Customer> findTop10ByNameLike(String pattern);
+    Page<Customer> findByNameLike(String pattern, Pageable pageable);
     
     List<Map<String, Object>> searchCust(String pattern);
 }

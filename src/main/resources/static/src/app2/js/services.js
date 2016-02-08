@@ -12,6 +12,18 @@ myService.service('CustService', ["$http", "$q", function( $http, $q) {
 		return $http.get('/cust');
 	};
 
+	this.pagable = function() {
+		return $http({
+				url : "/cust/searchCustPagable",
+				method : "post",
+				data : {
+					page: 1,
+					size: 2,
+					search: ""
+				}
+			});
+	};
+
 	this.detail = function(custId) {
 		return $http.get('/cust/' + custId);
 	};

@@ -1,8 +1,39 @@
 .user-select(@type) {
     user-select: @type;
 }
+
+/*animate*/
+.transition (@time: 1s, @ease: linear, @opacity: 0.3s, @ease: ease-in) {
+    transition: @time @ease;
+}
+
+.transform (@scale: 100%) {
+    transform: translateX(@scale);
+}
+
 html  {
   .user-select(none);
+}
+
+.slide.ng-leave {
+  position: relative;
+}
+
+.slide.ng-enter {
+  position: absolute;
+}
+.slide.ng-enter, .slide.ng-leave {
+    .transition(0.3s, ease-in, 0.3s, ease-in);
+}
+
+.slide.ng-enter, .slide.ng-leave.ng-leave-active {
+    .transform(0.0001);
+    opacity: 0;
+}
+
+.slide, .slide.ng-enter.ng-enter-active {
+  .transform(1);
+  opacity: 1;
 }
 
 [rx-drag] {

@@ -22,6 +22,8 @@ import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -56,15 +58,6 @@ public class CustController {
 		return customerRepository.findAll();
 	}
 	
-	@RequestMapping(value = "/cust/search", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-	@ResponseBody
-	public List<Customer> searchByName(@RequestBody Map<String, String> search) {
-		String searchAction = search.get("action");
-		if("namesearch".equals(searchAction))
-			return customerRepository.findTop10ByNameLike(search.get("search"));
-		return Lists.newArrayList();
-	}
-	
 	@RequestMapping(value = "/cust/searchCust", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public List<Map<String, Object>> search(@RequestBody Map<String, String> search) {
@@ -73,6 +66,15 @@ public class CustController {
 			return customerRepository.searchCust(search.get("search"));
 		return Lists.newArrayList();
 	}
+	
+	@RequestMapping(value = "/cust/searchCustPagable", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public Page<Customer> searchPagable(@RequestBody Map<String, String> map) {
+		PageRequest pageReq = new PageRequest(Integer.parseInt(map.get("page")), Integer.parseInt(map.get("size")));
+		return customerRepository.findByNameLike("%"+map.get("search")+"%", pageReq);
+	}
+	
+	
 	
 	@RequestMapping(value = "/cust/{id}", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	@ResponseBody
