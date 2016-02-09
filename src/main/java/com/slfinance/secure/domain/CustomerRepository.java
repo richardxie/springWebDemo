@@ -52,5 +52,8 @@ public interface CustomerRepository extends JpaRepository<Customer, String>, Cus
     
     Page<Customer> findByNameLike(String pattern, Pageable pageable);
     
+    @Query("select new com.slfinance.secure.domain.CustomerVo(e.id, e.name, e.email, e.age, e.state.description) from Customer e where e.name like ?1")
+    Page<CustomerVo> findByNameLike2(String pattern, Pageable pageable);
+    
     List<Map<String, Object>> searchCust(String pattern);
 }

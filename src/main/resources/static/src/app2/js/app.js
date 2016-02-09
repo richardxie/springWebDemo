@@ -32,7 +32,7 @@ angular.module('rxApp', [ 'rx', 'rxApp.directive', "rxApp.service", 'ui.router',
 				resolve: {
 	            	custs: ['CustService',
 	              		function( CustService){
-	                		return CustService.pagable();
+	                		return CustService.pagable('', 0, 2);
 	              	}]
 	          	},
 	         	controller: ['$scope', '$state', 'custs',
@@ -64,20 +64,23 @@ angular.module('rxApp', [ 'rx', 'rxApp.directive', "rxApp.service", 'ui.router',
 			$rootScope.$stateParams = $stateParams;
 	    }
 	])
-	.controller('RxCtrl', ["$scope", "$http", "rx", function($scope, $http, rx) {
+	.controller('RxCtrl', ["$scope", "$http", "rx", "CustService",  function($scope, $http, rx, CustService ) {
 
-		$scope.totalItems = 64;
-    	$scope.itemsPerPage = 2
-  		$scope.currentPage = 0;
+		$scope.page = {
+			totalItems: 0,
+			itemsPerPage: 2,
+			currentPage: 1
+		};
+		
 		function searchCust(term) {
-			var deferred = $http({
+			var deferred = $http({ //
 				url : "/cust/searchCustPagable",
 				method : "post",
 				data : {
 					action : "namesearch",
 					search : term,
-					size: $scope.itemsPerPage,
-					page: $scope.currentPage,
+					size: $scope.page.itemsPerPage,
+					page: $scope.page.currentPage,
 					format : "json"
 				}
 			});
@@ -98,11 +101,12 @@ angular.module('rxApp', [ 'rx', 'rxApp.directive', "rxApp.service", 'ui.router',
 		
 
   		$scope.setPage = function (pageNo) {
-			$scope.currentPage = pageNo;
+			$scope.page.currentPage = pageNo;
+
 		};
 
 		$scope.pageChanged = function() {
-			console.log('Page changed to: ' + $scope.currentPage);
+			console.log('Page changed to: ' + $scope.page.currentPage);
 		};
 
 		/*
@@ -121,6 +125,7 @@ angular.module('rxApp', [ 'rx', 'rxApp.directive', "rxApp.service", 'ui.router',
 			.subscribe(
 				function(results) {
 					$scope.results = results;
+					$scope.page.totalItems = val.totalElements;
 					$scope.$apply();
 					console.log($scope.results);
 				}
@@ -133,9 +138,26 @@ angular.module('rxApp', [ 'rx', 'rxApp.directive', "rxApp.service", 'ui.router',
 			.flatMapLatest(searchCust)
 			.subscribe(function(val){ 
 				$scope.results = val.content; 
+				$scope.page.totalItems = val.totalElements;
 				$scope.$apply();
-				//$scope.totalItems = val;
 			});
+
+		var source1 = $scope.$toObservable('page.currentPage').map(function(value) {return value.newValue;});
+		var source2 = $scope.$toObservable('page.itemsPerPage').map(function(value) {return value.newValue;});
+		var source = source1.combineLatest(
+        	source2,
+        	function (s1, s2) { 
+        		return s1 + ',' + s2; 
+        	})
+		.debounce(300)
+		.subscribe(function(val){
+				CustService.pagable($scope.search, val.split(',')[0] - 1, val.split(',')[1])
+				.then(function(result) {
+					$scope.results = result.data.content; 
+					console.log(result);
+				});
+    			console.log(val);
+    		});
 
 	}])
 	.controller("EditCtrl", ["$scope", "$http", "$state", "$stateParams", "rx", "CustService", 

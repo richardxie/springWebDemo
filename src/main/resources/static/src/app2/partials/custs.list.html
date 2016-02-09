@@ -23,16 +23,16 @@
 				<td>{{cust.state}}</td>
 				<td>
 					<div>
-						<a class="btn btn-primary" ui-sref='custs.detail({custId:cust.ID})'>编辑</a><span>&nbsp;&nbsp;</span><button class="btn btn-primary">冻结</button>
+						<a class="btn btn-primary" ui-sref='custs.detail({custId:cust.id})'>编辑</a><span>&nbsp;&nbsp;</span><button class="btn btn-primary">冻结</button>
 					</div>
 				</td>
 			</tr>
 		</tbody>
 	</table>
-	<uib-pagination max-size=10 total-items="totalItems"  items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>
+	<uib-pagination max-size=10 total-items="page.totalItems"  items-per-page="page.itemsPerPage" ng-model="page.currentPage" ng-change="pageChanged()"></uib-pagination>
     <p>
-        Total items: {{totalItems}}<br />
-        Items per page: {{itemsPerPage}}<br />
-        Current Page: {{currentPage}}
+        Total items: {{page.totalItems}}<br />
+        Items per page: {{page.itemsPerPage}}<br />
+        Current Page: {{page.currentPage}}
     </p>
 </div>

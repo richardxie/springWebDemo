@@ -35,6 +35,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.common.collect.Lists;
 import com.slfinance.secure.domain.Customer;
 import com.slfinance.secure.domain.CustomerRepository;
+import com.slfinance.secure.domain.CustomerVo;
 
 /**
  * 用户控制器
@@ -69,9 +70,9 @@ public class CustController {
 	
 	@RequestMapping(value = "/cust/searchCustPagable", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public Page<Customer> searchPagable(@RequestBody Map<String, String> map) {
+	public Page<CustomerVo> searchPagable(@RequestBody Map<String, String> map) {
 		PageRequest pageReq = new PageRequest(Integer.parseInt(map.get("page")), Integer.parseInt(map.get("size")));
-		return customerRepository.findByNameLike("%"+map.get("search")+"%", pageReq);
+		return customerRepository.findByNameLike2("%"+map.get("search")+"%", pageReq);
 	}
 	
 	

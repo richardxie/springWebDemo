@@ -10,7 +10,7 @@
         <li ng-repeat="cust in custs | limitTo: 2">
 
           <!-- Here's a ui-sref that is also providing necessary parameters -->
-          <a ui-sref="custs.detail({custId:cust.ID})">{{cust.name}}</a>
+          <a ui-sref="custs.detail({custId:cust.id})">{{cust.name}}</a>
         </li>
       </ul>
 
