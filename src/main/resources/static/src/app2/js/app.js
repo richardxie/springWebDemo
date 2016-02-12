@@ -6,6 +6,7 @@ require('rx-lite-angular');
 require('angular-ui-router')
 require('angular-ui-bootstrap')
 require('angular-sanitize')
+require('ng-dialog')
 //require("angular-ui-select")
 require("./directives");
 require("./services");
@@ -18,7 +19,7 @@ exports.getTokens = function() {
 };
 
 
-angular.module('rxApp', [ 'rx', 'rxApp.directive', "rxApp.service", 'ui.router', 'ui.bootstrap', 'ui.select', 'ngSanitize'])
+angular.module('rxApp', [ 'rx', 'rxApp.directive', "rxApp.service", 'ui.router', 'ui.bootstrap', 'ui.select', 'ngSanitize', 'ngDialog'])
 	.config(["$httpProvider", '$locationProvider', '$stateProvider', '$urlRouterProvider',
 		function($httpProvider, $locationProvider, $stateProvider, $urlRouterProvider) {
 			// For any unmatched url, redirect to /custs
@@ -35,10 +36,7 @@ angular.module('rxApp', [ 'rx', 'rxApp.directive', "rxApp.service", 'ui.router',
 	                		return CustService.pagable('', 0, 2);
 	              	}]
 	          	},
-	         	controller: ['$scope', '$state', 'custs',
-		            function (  $scope,   $state,   custs ) {
-		            	$scope.custs = custs.data.content;
-					}]
+	         	controller: 'MainCtrl'
 			})
 			.state('custs.list' ,{
 				url: '',
@@ -53,6 +51,19 @@ angular.module('rxApp', [ 'rx', 'rxApp.directive', "rxApp.service", 'ui.router',
 			$httpProvider.defaults.headers.common[_csrf_header] = _csrf_token;
 			//$locationProvider.html5Mode(true);
 	}])
+	.config(['ngDialogProvider', function (ngDialogProvider) {
+            ngDialogProvider.setDefaults({
+                className: 'ngdialog-theme-default',
+                plain: false,
+                showClose: true,
+                closeByDocument: true,
+                closeByEscape: true,
+                appendTo: false,
+                preCloseCallback: function () {
+                    console.log('default pre-close callback');
+                }
+            });
+        }])
 	.run(['$rootScope', '$state', '$stateParams',
 		function ($rootScope,   $state,   $stateParams) {
 
@@ -64,23 +75,29 @@ angular.module('rxApp', [ 'rx', 'rxApp.directive', "rxApp.service", 'ui.router',
 			$rootScope.$stateParams = $stateParams;
 	    }
 	])
-	.controller('RxCtrl', ["$scope", "$http", "rx", "CustService",  function($scope, $http, rx, CustService ) {
+	.controller('MainCtrl', ['$scope', '$rootScope','$state', 'custs', function($scope, $rootScope, $state, custs){
+		$rootScope.jsonData = '{"foo": "bar"}';
+        $rootScope.theme = 'ngdialog-theme-default';
+		$scope.search = { //prototype 继承
+		            		term: '',
+							totalItems: 0,
+							itemsPerPage: 2,
+							currentPage: 1
+						};
+		$scope.results = [];
+		$scope.custs = custs.data.content;
+	}])
+	.controller('RxCtrl', ["$scope", "$http", "rx", "ngDialog", "CustService",  function($scope, $http, rx, ngDialog, CustService ) {
 
-		$scope.page = {
-			totalItems: 0,
-			itemsPerPage: 2,
-			currentPage: 1
-		};
-		
 		function searchCust(term) {
 			var deferred = $http({ //
 				url : "/cust/searchCustPagable",
 				method : "post",
 				data : {
 					action : "namesearch",
-					search : term,
-					size: $scope.page.itemsPerPage,
-					page: $scope.page.currentPage,
+					search : $scope.search.term,
+					size: $scope.search.itemsPerPage,
+					page: $scope.search.currentPage - 1,
 					format : "json"
 				}
 			});
@@ -95,19 +112,23 @@ angular.module('rxApp', [ 'rx', 'rxApp.directive', "rxApp.service", 'ui.router',
 					}
 				);
 		}
-
-		$scope.search = '';
-		$scope.results = [];
 		
-
   		$scope.setPage = function (pageNo) {
-			$scope.page.currentPage = pageNo;
+			$scope.search.currentPage = pageNo;
 
 		};
 
 		$scope.pageChanged = function() {
-			console.log('Page changed to: ' + $scope.page.currentPage);
+			console.log('Page changed to: ' + $scope.search.currentPage);
 		};
+
+		$scope.openDefault = function () {
+                ngDialog.open({
+                    template: 'firstDialogId',
+                    controller: 'InsideCtrl',
+                    className: 'ngdialog-theme-plain'
+                });
+            };
 
 		/*
 		 * The following code deals with: Creates a "submit"
@@ -125,25 +146,28 @@ angular.module('rxApp', [ 'rx', 'rxApp.directive', "rxApp.service", 'ui.router',
 			.subscribe(
 				function(results) {
 					$scope.results = results;
-					$scope.page.totalItems = val.totalElements;
+					$scope.search.totalItems = val.totalElements;
 					$scope.$apply();
 					console.log($scope.results);
 				}
 			);
 
-		$scope.$toObservable('search')
+		$scope.$toObservable('search.term')
 			.debounce(300)
-			.map(function(data) { console.log(data); return data.newValue; })
+			.map(function(data) { 
+				console.log(data); 
+				$scope.search.currentPage = 1;
+				return data.newValue; })
 			.distinctUntilChanged()
 			.flatMapLatest(searchCust)
 			.subscribe(function(val){ 
 				$scope.results = val.content; 
-				$scope.page.totalItems = val.totalElements;
+				$scope.search.totalItems = val.totalElements;
 				$scope.$apply();
 			});
 
-		var source1 = $scope.$toObservable('page.currentPage').map(function(value) {return value.newValue;});
-		var source2 = $scope.$toObservable('page.itemsPerPage').map(function(value) {return value.newValue;});
+		var source1 = $scope.$toObservable('search.currentPage').map(function(value) {return value.newValue;});
+		var source2 = $scope.$toObservable('search.itemsPerPage').map(function(value) {return value.newValue;});
 		var source = source1.combineLatest(
         	source2,
         	function (s1, s2) { 
@@ -151,7 +175,7 @@ angular.module('rxApp', [ 'rx', 'rxApp.directive', "rxApp.service", 'ui.router',
         	})
 		.debounce(300)
 		.subscribe(function(val){
-				CustService.pagable($scope.search, val.split(',')[0] - 1, val.split(',')[1])
+				CustService.pagable($scope.search.term, val.split(',')[0] - 1, val.split(',')[1])
 				.then(function(result) {
 					$scope.results = result.data.content; 
 					console.log(result);
@@ -219,4 +243,9 @@ angular.module('rxApp', [ 'rx', 'rxApp.directive', "rxApp.service", 'ui.router',
 				// Go back up. '^' means up one. '^.^' would be up twice, to the grandparent.
 				$state.go('custs.list', $stateParams);
 			};
+	}])
+	.controller("InsideCtrl", ["$scope", function($scope){
+		$scope.dialogModel = {
+                message : 'message from passed scope'
+            };
 	}]);
