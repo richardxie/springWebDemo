@@ -137,6 +137,12 @@ module.exports = function(grunt){
 			cwd: 'node_modules/angular-ui-select',
 			src: ['*.js'],
 			dest: 'src/main/resources/static/dist/js'
+        },
+        dialogcss: {
+        	expand: true,
+			cwd: 'node_modules/ng-dialog/css',
+			src: ['*.css'],
+			dest: 'src/main/resources/static/dist/css'
         }
 
     },

@@ -1,6 +1,18 @@
+<script type="text/ng-template" id="firstDialogId">
+        <div class="ngdialog-message">
+            <h3>ngDialog modal example</h3>
+            <p>The <code>.openConfirm()</code> function returns a promise that is resolved when confirmed and rejected when otherwise closed. Modal dialogs by default do not close when clicked outside the dialog or when hitting escape. This can ofcourse be overridden when opening the dialog.</p>
+            <p>Confirm can take a value. Enter one here for example and see the console output: <input ng-model="confirmValue" /></p>
+        </div>
+        <div class="ngdialog-buttons">
+            <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="confirm(confirmValue)">Confirm</button>
+            <button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog('button')">Cancel</button>
+        </div>
+</script>
+
 <div class="container">
 	<form ng-submit="submit(search)">
-		<input type="text" ng-model="search"></input>
+		<input type="text" ng-model="search.term"></input>
 		<button>Search</button>
 	</form>
 
@@ -23,16 +35,16 @@
 				<td>{{cust.state}}</td>
 				<td>
 					<div>
-						<a class="btn btn-primary" ui-sref='custs.detail({custId:cust.id})'>编辑</a><span>&nbsp;&nbsp;</span><button class="btn btn-primary">冻结</button>
+						<a class="btn btn-primary" ui-sref='custs.detail({custId:cust.id})'>编辑</a><span>&nbsp;&nbsp;</span><button class="btn btn-primary" ng-click="openDefault()">冻结</button>
 					</div>
 				</td>
 			</tr>
 		</tbody>
 	</table>
-	<uib-pagination max-size=10 total-items="page.totalItems"  items-per-page="page.itemsPerPage" ng-model="page.currentPage" ng-change="pageChanged()"></uib-pagination>
+	<uib-pagination max-size=10 total-items="search.totalItems"  items-per-page="search.itemsPerPage" ng-model="search.currentPage" ng-change="pageChanged()"></uib-pagination>
     <p>
-        Total items: {{page.totalItems}}<br />
-        Items per page: {{page.itemsPerPage}}<br />
-        Current Page: {{page.currentPage}}
+        Total items: {{search.totalItems}}<br />
+        Items per page: {{search.itemsPerPage}}<br />
+        Current Page: {{search.currentPage}}
     </p>
 </div>

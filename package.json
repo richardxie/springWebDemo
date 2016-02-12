@@ -43,6 +43,7 @@
     "bootstrap": "^3.3.6",
     "jquery": "^2.2.0",
     "less-plugin-clean-css": "^1.5.1",
+    "ng-dialog": "^0.5.6",
     "ng-table": "^0.5.4",
     "rx-lite": "^4.0.7",
     "rx-lite-angular": "^1.1.3"
