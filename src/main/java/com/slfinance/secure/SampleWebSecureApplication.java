@@ -121,16 +121,17 @@ public class SampleWebSecureApplication extends WebMvcConfigurerAdapter {
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			http.authorizeRequests().antMatchers("/", "/register", "/cust/isExist").permitAll()
-				.anyRequest().fullyAuthenticated()
+				.anyRequest().authenticated()
 				.and().formLogin().loginPage("/login").failureUrl("/login?error").permitAll()
 				.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/home")
 				.and().exceptionHandling().accessDeniedPage("/access?error")
-				.and().csrf();
+				.and().csrf()
+				.and().rememberMe().key("demokey").tokenValiditySeconds(1209600);
 		}
 
 		@Override
 		public void configure(AuthenticationManagerBuilder auth) throws Exception {
-			auth.inMemoryAuthentication().withUser("admin").password("admin")
+			auth.eraseCredentials(false).inMemoryAuthentication().withUser("admin").password("admin")
 					.roles("ADMIN", "SUPERVISOR", "USER").and().withUser("user").password("user")
 					.roles("USER");
 		}
