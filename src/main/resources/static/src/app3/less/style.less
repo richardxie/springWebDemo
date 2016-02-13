@@ -1,0 +1,31 @@
+.border-radius(@radius) {
+    border-radius: @radius;
+}
+
+.rotate(@deg) {
+    transform:rotate(@deg);
+}
+
+.translate(@dx, @dy) {
+	transform:translate(@dx,@dy);
+}
+
+.transition(@prop, @duration, @timing, @delay) {
+	transition:@prop @duration @timing @delay;
+}
+
+div#rot
+{
+    .rotate(5deg);
+    .transition(width, 1s, linear, 2s);
+}
+
+div#trans
+{
+	.translate(50px,100px);
+}
+
+div#rot:hover
+{
+	width:300px;
+}

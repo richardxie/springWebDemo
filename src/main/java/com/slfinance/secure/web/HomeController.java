@@ -109,6 +109,6 @@ public class HomeController {
 		model.put("message", "Hello World");
 		model.put("title", "Hello Home");
 		model.put("date", new Date());
-		return "home";
+		return "thymeleaf/home";
 	}
 }

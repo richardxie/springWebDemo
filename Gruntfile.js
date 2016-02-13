@@ -10,6 +10,10 @@ module.exports = function(grunt){
 			src: 'src/main/resources/static/src/app2/js/app.js',
 			dest: 'src/main/resources/static/dist/app2/js/<%= pkg.name %>.js'
         }, 
+        js3:{
+			src: 'src/main/resources/static/src/app3/js/app.js',
+			dest: 'src/main/resources/static/dist/app3/js/<%= pkg.name %>.js'
+        },
         main:{
 			src: 'src/main/resources/static/src/main/js/main.js',
 			dest: 'src/main/resources/static/dist/main/js/main.js'
@@ -27,6 +31,11 @@ module.exports = function(grunt){
 			}
 		},
 		my_target3: {
+			files: {
+				'src/main/resources/static/dist/app3/js/<%= pkg.name %>.min.js': ['<%= browserify.js3.dest %>']
+			}
+		},
+		my_target4: {
 			files: {
 				'src/main/resources/static/dist/main/js/main.min.js': ['<%= browserify.main.dest %>']
 			}
@@ -62,6 +71,18 @@ module.exports = function(grunt){
 		    }
 		  },
 		  less3: {
+		    options: {
+		      paths: ["src/main/resources/static/src/app3/css"],
+		      plugins: [
+				        new (require('less-plugin-autoprefix'))({browsers: ["last 3 versions"]}),
+				        //new (require('less-plugin-clean-css'))()
+				      ],
+		    },
+		    files: {
+		      "src/main/resources/static/src/app3/css/style.css": "src/main/resources/static/src/app3/less/*.less"
+		    }
+		  },
+		  less4: {
 		    options: {
 		      paths: ["src/main/resources/static/src/main/css"],
 		      plugins: [
@@ -104,6 +125,15 @@ module.exports = function(grunt){
 			    }]
 		  },
 		  cs3: {
+			  files: [{
+			      expand: true,
+			      cwd: 'src/main/resources/static/src/app3/css',
+			      src: ['*.css', '!*.min.css'],
+			      dest: 'src/main/resources/static/dist/app3/css',
+			      ext: '.min.css'
+			    }]
+		  },
+		  cs4: {
 			  files: [{
 			      expand: true,
 			      cwd: 'src/main/resources/static/src/main/css',
@@ -164,6 +194,10 @@ module.exports = function(grunt){
 			files:['src/main/resources/static/src/app2/js/*.js'],
 			tasks:['browserify:js2','uglify:my_target2']
 		},
+		js3:{
+			files:['src/main/resources/static/src/app3/js/*.js'],
+			tasks:['browserify:js2','uglify:my_target3']
+		},
 		css1: {
 			files:['src/main/resources/static/src/app1/less/*.less'],
 			tasks:['less:less1','cssmin:cs1']
@@ -173,12 +207,16 @@ module.exports = function(grunt){
 			tasks:['less:less2','cssmin:cs2']
 		},
 		css3: {
-			files:['src/main/resources/static/src/main/less/*.less'],
+			files:['src/main/resources/static/src/app3/less/*.less'],
 			tasks:['less:less3','cssmin:cs3']
+		},
+		css4: {
+			files:['src/main/resources/static/src/main/less/*.less'],
+			tasks:['less:less4','cssmin:cs4']
 		},
 		main:{
 			files:['src/main/resources/static/src/main/js/*.js'],
-			tasks:['browserify:main','uglify:my_target3']
+			tasks:['browserify:main','uglify:my_target4']
 		},
 		html:{
 			files:['**/*.html'],

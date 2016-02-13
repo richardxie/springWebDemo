@@ -5,12 +5,15 @@
 <meta name="_csrf_header" th:content="${_csrf.headerName}" />
 <meta name="_csrf" th:content="${_csrf.token}" />
 <title th:text="${title}">Title</title>
+<link rel="stylesheet" th:href="@{/dist/app3/css/style.min.css}"
+		href="/dist/app3/css/style.min.css" />
+<script src="/dist/app3/js/app.min.js"></script>
 </head>
-<body>
+<body ng-apo='themleaf'>
 	<section layout:fragment="content">
 		<h1 th:text="${title}">Title</h1>
-		<div th:text="${message}">Fake content</div>
-		<div id="created" th:text="${#dates.format(date)}">July 11,
+		<div id='trans' th:text="${message}">Fake content</div>
+		<div id="rot" th:text="${#dates.format(date)}">July 11,
 			2012 2:17:16 PM CDT</div>
 		<button class="clickme">clickme</button>
 	</section>
