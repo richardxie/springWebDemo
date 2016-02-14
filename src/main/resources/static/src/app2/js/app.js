@@ -89,6 +89,30 @@ angular.module('rxApp', [ 'rx', 'rxApp.directive', "rxApp.service", 'ui.router',
 	}])
 	.controller('RxCtrl', ["$scope", "$http", "rx", "ngDialog", "CustService",  function($scope, $http, rx, ngDialog, CustService ) {
 
+		/**
+		* datapicker
+		**/
+		$scope.today = function() {
+			$scope.dt = new Date();
+		};
+  		$scope.today();
+
+  		$scope.open1 = function() {
+			$scope.popup1.opened = true;
+		};
+		$scope.dateOptions = {
+			formatYear: 'yy',
+    		startingDay: 1
+  		};
+
+		$scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+		$scope.format = $scope.formats[0];
+		$scope.altInputFormats = ['M!/d!/yyyy'];
+
+		$scope.popup1 = {
+			opened: false
+		};
+
 		function searchCust(term) {
 			var deferred = $http({ //
 				url : "/cust/searchCustPagable",

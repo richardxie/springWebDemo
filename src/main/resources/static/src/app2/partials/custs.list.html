@@ -12,8 +12,23 @@
 
 <div class="container">
 	<form ng-submit="submit(search)">
-		<input type="text" ng-model="search.term"></input>
-		<button>Search</button>
+		<div lass="row">
+			<div class="col-md-3">
+				<input type="text" ng-model="search.term"></input> 
+			</div>
+			<div class="col-md-6">
+
+				<p class="input-group">
+					<input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+					</span>
+				</p>
+			</div>
+			<div class="col-md-3">
+				<button>Search</button>
+			</div>
+		</div>
 	</form>
 
 	<table class="table">
