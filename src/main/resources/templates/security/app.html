@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorator="layout/layout">
+<head>
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+<meta name="_csrf" th:content="${_csrf.token}" />
+<title th:text="${title}">Title</title>
+<script>
+	window.onload = function() {
+		var c = document.getElementById("myCanvas"); //获取要操作的canvas
+		var ctx = c.getContext("2d"); //获取该canvas的2D绘图环境对象
+			
+
+		ctx.beginPath();
+		ctx.arc(100,40,20,0,2*Math.PI);
+		ctx.fillStyle="red";
+		ctx.fill();
+
+		ctx.beginPath();
+		ctx.arc(100,100,20,0,2*Math.PI);
+		ctx.fillStyle="yellow";
+			ctx.fill();
+
+		ctx.beginPath();
+		ctx.arc(100,160,20,0,2*Math.PI);
+		ctx.fillStyle="green";
+		ctx.fill();
+	}
+</script>
+</head>
+<body >
+	<section layout:fragment="content">
+		<canvas id="myCanvas"  width="200" height="200" style="border:solid 1px #CCC; margin:30px;"></canvas>
+	</section>
+	
+</body>
+</html>

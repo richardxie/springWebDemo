@@ -18,21 +18,37 @@
 </head>
 <body ng-app="rxApp">
 	<section layout:fragment="content">
-		<div class="page-header">
-        	<h2>Reactive Angular Demo</h2>
-      	</div>
+		 <div class="container">
+     		<div class="row">
+     			<div class="col-sm-3 col-md-2 sidebar">
+		          <ul class="nav nav-sidebar">
+		            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+		            <li><a href="#">Reports</a></li>
+		            <li><a href="#">Analytics</a></li>
+		            <li><a ui-sref="about">About</a></li>
+		          </ul>
+		          <ul class="nav nav-sidebar">
+		            <li><a ui-sref="custs.list">Cust</a></li>
+		            <li><a ui-sref="prod.list">Product</a></li>
+		          </ul>
+		        </div>
+		        <div class="col-sm-9 col-md-10 main">
+        			<h2  class="page-header">Reactive Angular Demo</h2>
+        			<div class="slide" ui-view=""></div>
+        			<hr />
+				    <pre>
+				      <!-- Here's some values to keep an eye on in the sample in order to understand $state and $stateParams -->
+				      $state = {{$state.current.name}}
+				      $stateParams = {{$stateParams}}
+				      $state full url = {{ $state.$current.url.source }}
+				      <!-- $state.$current is not a public api, we are using it to
+				           display the full url for learning purposes-->
+				    </pre>
+      			</div>
+		 	</div>
+		</div>
 
-		 <div class="slide" ui-view=""></div>
-
-		<hr />
-	    <pre>
-	      <!-- Here's some values to keep an eye on in the sample in order to understand $state and $stateParams -->
-	      $state = {{$state.current.name}}
-	      $stateParams = {{$stateParams}}
-	      $state full url = {{ $state.$current.url.source }}
-	      <!-- $state.$current is not a public api, we are using it to
-	           display the full url for learning purposes-->
-	    </pre>
+		
 	</section>
 
 </body>

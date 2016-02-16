@@ -1,17 +1,16 @@
 <div class="row">
-<div class="row">
   <div class="span3">
     <div class="pa-sidebar well well-small">
       <ul class="nav nav-list">
-        <li ng-class="{ active: $state.includes('custs.list') }"><a ui-sref="custs.list">All Customers</a></li>
-        <li class="nav-header">Top Customer</li>
+        <li ng-class="{ active: $state.includes('prod.list') }"><a ui-sref="prod.list">All Products</a></li>
+        <li class="nav-header">Top Products</li>
 
         <!-- This <li> will only add the 'active' class if 'contacts.detail' or its descendants are active
              AND if it is the link for the active contact (aka contactId) -->
-        <li ng-repeat="cust in custs | limitTo: 2">
+        <li ng-repeat="prod in prods | limitTo: 2">
 
           <!-- Here's a ui-sref that is also providing necessary parameters -->
-          <a ui-sref="custs.detail({custId:cust.id})">{{cust.name}}</a>
+          <a ui-sref="prod.detail({prodId:prod.id})">{{prod.productName}}</a>
         </li>
       </ul>
 

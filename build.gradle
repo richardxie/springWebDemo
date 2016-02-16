@@ -35,6 +35,8 @@ apply plugin: 'com.moowork.grunt'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+mainClassName = 'com.slfinance.secure.SampleWebSecureApplication'
+applicationDefaultJvmArgs = ["-Dfile.encoding=UTF-8"]
 
 // In this section you declare where to find the dependencies of your project
 repositories {
@@ -42,6 +44,9 @@ repositories {
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
 }
+
+tasks.withType(org.gradle.api.tasks.compile.JavaCompile.class).all{ task -> task.options.encoding = 'utf-8' }
+
 
 // In this section you declare the dependencies for your production and test code
 dependencies {

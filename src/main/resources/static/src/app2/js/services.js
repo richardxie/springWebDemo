@@ -36,3 +36,33 @@ myService.service('CustService', ["$http", "$q", function( $http, $q) {
 			});
 	}
 }]);
+
+myService.service('ProdService', ["$http", "$q", function( $http, $q) {
+	this.list = function() {
+		return $http.get('/prod');
+	};
+
+	this.pagable = function(search, page, size) {
+		return $http({
+				url : "/prod/searchProdPagable",
+				method : "post",
+				data : {
+					page: page,
+					size: size,
+					search: search
+				}
+			});
+	};
+
+	this.detail = function(prodId) {
+		return $http.get('/prod/' + prodId);
+	};
+
+	this.edit  = function(prodId, prod){
+		return $http({
+				url : "/prod/" + prodId,
+				method : "post",
+				data : prod
+			});
+	}
+}]);

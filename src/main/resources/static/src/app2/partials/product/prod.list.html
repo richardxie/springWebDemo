@@ -36,21 +36,21 @@
 		<thead>
 			<tr>
 				<th>名称</th>
-				<th>邮件</th>
-				<th>年龄</th>
+				<th>描述</th>
+				<th>年利率</th>
 				<th>状态</th>
 				<th>处理</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="cust in results">
-				<td>{{cust.name}}</td>
-				<td>{{cust.email}}</td>
-				<td>{{cust.age}}</td>
-				<td>{{cust.state}}</td>
+			<tr ng-repeat="prod in results">
+				<td>{{prod.productName}}</td>
+				<td>{{prod.productDesc}}</td>
+				<td>{{prod.yearRate}}</td>
+				<td>{{prod.enableStatus}}</td>
 				<td>
 					<div>
-						<a class="btn btn-primary" ui-sref='custs.detail({custId:cust.id})'>编辑</a><span>&nbsp;&nbsp;</span><button class="btn btn-primary" ng-click="openDefault()">冻结</button>
+						<a class="btn btn-primary" ui-sref='prod.detail({prodId:prod.id})'>编辑</a><span>&nbsp;&nbsp;</span><button class="btn btn-primary" ng-click="openDefault()">冻结</button>
 					</div>
 				</td>
 			</tr>
