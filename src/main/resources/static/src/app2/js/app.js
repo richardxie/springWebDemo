@@ -10,8 +10,9 @@ require('angular-sanitize')
 require('ng-dialog')
 require('./customer')
 require('./product')
-require("./directives");
-require("./services");
+require("./directives")
+require("./services")
+require("./utils")
 
 var _csrf_token = $("meta[name='_csrf']").attr("content");
 var _csrf_header = $("meta[name='_csrf_header']").attr("content");
