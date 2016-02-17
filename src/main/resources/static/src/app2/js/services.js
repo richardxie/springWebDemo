@@ -44,7 +44,7 @@ myService.service('ProdService', ["$http", "$q", function( $http, $q) {
 
 	this.pagable = function(search, page, size) {
 		return $http({
-				url : "/prod/searchProdPagable",
+				url : "/prod/searchProdPagable2",
 				method : "post",
 				data : {
 					page: page,

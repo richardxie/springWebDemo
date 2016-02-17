@@ -20,8 +20,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class ProductDetail  extends  AbstractEntity{
 
 	@NotEmpty
-	private String productId;
-	private BigDecimal alreadyInvestPeople;
+	private Integer alreadyInvestPeople;
 	private BigDecimal alreadyInvestAmount;
 	private BigDecimal currUsableValue;
 	private BigDecimal partakeOrganizs;

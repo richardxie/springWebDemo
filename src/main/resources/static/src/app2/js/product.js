@@ -1,6 +1,6 @@
 'use strict';
 // 通过 require 引入依赖
-angular.module('rxApp.product', [ 'rx', 'rxApp.directive', "rxApp.service", 'ui.router', 'ui.bootstrap', 'ui.select', 'ngSanitize', 'ngDialog'])
+angular.module('rxApp.product', [ 'rx', 'rxApp.directive', "rxApp.service", "rxApp.utils", 'ui.router', 'ui.bootstrap', 'ui.select', 'ngSanitize', 'ngDialog'])
 	.config(['$locationProvider', '$stateProvider', '$urlRouterProvider',
 		function($locationProvider, $stateProvider, $urlRouterProvider) {
 			// For any unmatched url, redirect to /custs
@@ -43,7 +43,7 @@ angular.module('rxApp.product', [ 'rx', 'rxApp.directive', "rxApp.service", 'ui.
                 }
             });
         }])
-	.controller('MainProdCtrl', ['$scope', '$rootScope','$state', 'prods', function($scope, $rootScope, $state, prods){
+	.controller('MainProdCtrl', ['$scope', '$rootScope','$state', 'prods', 'utils', function($scope, $rootScope, $state, prods, utils){
 		$rootScope.jsonData = '{"foo": "bar"}';
         $rootScope.theme = 'ngdialog-theme-default';
 		$scope.search = { //prototype 继承
@@ -83,7 +83,7 @@ angular.module('rxApp.product', [ 'rx', 'rxApp.directive', "rxApp.service", 'ui.
 
 		function searchProd(term) {
 			var deferred = $http({ //
-				url : "/prod/searchProdPagable",
+				url : "/prod/searchProdPagable2",
 				method : "post",
 				data : {
 					action : "namesearch",
@@ -176,28 +176,28 @@ angular.module('rxApp.product', [ 'rx', 'rxApp.directive', "rxApp.service", 'ui.
     		});
 
 	}])
-	.controller("EditProdCtrl", ["$scope", "$http", "$state", "$stateParams", "rx", "ProdService", 
-		function($scope, $http, $state, $stateParams, rx, ProdService) {
+	.controller("EditProdCtrl", ["$scope", "$http", "$state", "$stateParams", "rx", "ProdService", "utils",
+		function($scope, $http, $state, $stateParams, rx, ProdService, utils) {
 			$scope.currentProd = '';
 			$scope.stateArray = [
 		        {id: 1, name: '停用'},
 		        {id: 2, name: '启用'}
     		];
 
-    		function whichState(name) {
+    		/*function whichState(name) {
     			for(var i =0; i < $scope.stateArray.length; i++) {
     				if($scope.stateArray[i].name == name) 
     					return $scope.stateArray[i];
     			}
     			return 'undefined';
-    		}
+    		}*/
     		$scope.selectedItem= $scope.stateArray[0];
 			var vm = this;
 		 	vm.getById = function(id) {
 	 		 	ProdService.detail(id)
 		 		 	.then(function(prod) {
 		 		 		$scope.currentProd = prod.data;
-		 		 		$scope.selectedItem= whichState($scope.currentProd.enableStatus);
+		 		 		$scope.selectedItem= utils.findByName($scope.stateArray, $scope.currentProd.enableStatus);
 		 		 		console.log('product returned to controller.');
 		 		 	},
 		 		 	function() {

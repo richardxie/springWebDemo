@@ -16,7 +16,10 @@ package com.slfinance.secure.domain;
 
 import java.math.BigDecimal;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -54,7 +57,7 @@ public class Product extends AbstractEntity{
 	private String productName;
 	
 	private String productStatus;
-	
+
 	private Integer typeTerm;
 	
 	private Integer seatTerm;
@@ -77,4 +80,8 @@ public class Product extends AbstractEntity{
 	
 	@NotEmpty
 	private BigDecimal yearRate;
+	
+	 @OneToOne(cascade=CascadeType.ALL)  
+	 @JoinColumn(name="RRODUCT_DETAIL_ID")  
+	private ProductDetail productDetail;
 }

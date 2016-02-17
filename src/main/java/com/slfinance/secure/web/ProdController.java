@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.slfinance.secure.domain.Product;
 import com.slfinance.secure.domain.ProductRepository;
+import com.slfinance.secure.domain.ProductVo;
 
 /**
  * 用户控制器
@@ -66,6 +67,14 @@ public class ProdController {
 			return productRepository.findAll(pageReq);
 		return 
 			productRepository.findByProductNameLike("%"+term+"%", pageReq);
+	}
+	
+	@RequestMapping(value = "/prod/searchProdPagable2", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public Page<ProductVo> searchPagable2(@RequestBody Map<String, String> map) {
+		PageRequest pageReq = new PageRequest(Integer.parseInt(map.get("page")), Integer.parseInt(map.get("size")));
+		String term = map.get("search");
+		return productRepository.findByProductNameLike2("%" + (StringUtils.isEmpty(term)?"":term) + "%", pageReq);
 	}
 	
 	@RequestMapping(value = "/prod/{id}", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
