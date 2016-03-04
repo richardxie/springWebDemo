@@ -103,14 +103,6 @@ public class HomeController {
 		model.put("date", new Date());
 		return "angular/app";
 	}
-	
-	@RequestMapping("/thymeleaf")
-	public String thymeleaf(ModelMap model) {
-		model.put("message", "Hello World");
-		model.put("title", "Hello Home");
-		model.put("date", new Date());
-		return "thymeleaf/home";
-	}
 
 	@RequestMapping("/security")
 	public String security(ModelMap model) {

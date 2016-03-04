@@ -2,19 +2,48 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
   layout:decorator="layout/layout">
 <head>
+<meta charset="UTF-8"></meta>
 <meta name="_csrf_header" th:content="${_csrf.headerName}" />
 <meta name="_csrf" th:content="${_csrf.token}" />
 <title th:text="${title}">Title</title>
+<link rel="stylesheet" th:href="@{/dist/css/bootstrap.min.css}"
+		href="../../static/dist/css/bootstrap.min.css"></link>
 <link rel="stylesheet" th:href="@{/dist/app3/css/style.min.css}"
-		href="/dist/app3/css/style.min.css" />
-<script src="/dist/app3/js/app.min.js"></script>
+		href="../../static/dist/app3/css/style.css" />
+<script src="../../static/dist/app3/js/app.js" th:src="@{/dist/app3/js/app.min.js}"></script>
 </head>
 <body ng-app='themleaf'>
 	<section layout:fragment="content">
 		<h1 th:text="${title}">Title</h1>
-		<div id='trans' th:text="${message}">Fake content</div>
-		<div id="rot" th:text="${#dates.format(date)}">July 11,
-			2012 2:17:16 PM CDT</div>
+<!-- 		<div id='trans' th:text="${message}">Fake content</div> -->
+		<p>Session: <span th:text="${#httpSession.id}">httpSession</span></p>
+		<p>Requset: <span th:text="${#httpServletRequest.getParameter('p')}">httpRequest</span></p>
+		Established locale country: <span th:text="${#locale.country}">US</span>
+		<p>Message: <span th:text="#{action.confirm}">confirm</span></p>
+<!-- 		<div id="rot" th:text="${#dates.format(date)}">July 11, -->
+<!-- 			2012 2:17:16 PM CDT</div> -->
+		<div th:text="${#dates.format(date)}">July 11, 2012 2:17:16 PM CDT</div>
+		<div th:text="${#dates.format(date, 'dd/MMM/yyyy HH:mm')}">July 11, 2012 2:17:16 PM CDT</div>
+		<p><span th:text="${balance}">balance</span></p>
+		<table class="table">
+			<caption>查询列表</caption>
+			<thead>
+				<tr>
+					<th>名称</th>
+					<th>描述</th>
+					<th>年利率</th>
+					<th>状态</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="prod : ${prods}"  th:class="${prod.enableStatus} == '停用'? 'warning'">
+			        <td th:text="${prod.productName}"><span th:text="#{product.name}">productName</span></td>
+					<td th:text="${prod.productDesc}">productDesc</td>
+					<td th:text="${prod.yearRate}">yearRate</td>
+					<td th:text="${prod.enableStatus}">enableStatus</td>
+			    </tr>
+			</tbody>
+		</table>
 		<button class="clickme">clickme</button>
 	</section>
 </body>

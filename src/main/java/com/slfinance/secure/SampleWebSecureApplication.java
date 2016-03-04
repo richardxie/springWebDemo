@@ -27,8 +27,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -82,6 +84,14 @@ public class SampleWebSecureApplication extends WebMvcConfigurerAdapter {
 		s.add(new org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect());
 		engine.setAdditionalDialects(s);
 		return engine;
+	}
+
+	@Bean
+	public MessageSource messageSource() {
+		ResourceBundleMessageSource ms = new ResourceBundleMessageSource();
+		ms.setBasename("Messages");
+		ms.setDefaultEncoding("UTF-8");
+		return ms;
 	}
 	
 	@Bean
